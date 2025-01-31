@@ -113,13 +113,13 @@
                 </div>
                 <div class="flex flex-col space-y-2">
                     <!-- Profile Link -->
-                    <x-responsive-nav-link :href="route('profile.edit')" class="flex items-center justify-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">
+                    <summary :href="route('profile.edit')" class="flex items-center justify-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" 
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 15v-2m0 6v-2m0-6v-2"/>
                         </svg>
                         <span x-show="!$store.sidebar.isCollapsed" class="ml-3">Profile</span>
-                    </x-responsive-nav-link>
+                    </summary>
 
                     <!-- Log Out Button -->
                     <form method="POST" action="{{ route('editor.logout') }}">

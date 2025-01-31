@@ -15,13 +15,18 @@
                     <!-- Total Users Box -->
                     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm rounded-lg p-6 h-32 flex flex-col justify-center items-center">
                         <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300">Total Users</h3>
-                        <p class="text-2xl pt-4 font-bold text-green-500 dark:text-green-500">{{ 2 }}</p>
+                        <p class="text-2xl pt-4 font-bold text-green-500 dark:text-green-500">{{ $totalUser ?? 0}}</p>
                     </div>
         
-                    <!-- Total Contents Box -->
+                    <!-- Total editor Box -->
                     <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm rounded-lg p-6 h-32 flex flex-col justify-center items-center">
-                        <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300">Total Contents</h3>
-                        <p class="text-2xl pt-4 font-bold text-green-500 dark:text-green-500">{{ 3 }}</p>
+                        <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300">Total Editors</h3>
+                        <p class="text-2xl pt-4 font-bold text-green-500 dark:text-green-500">{{ $totalEditor ?? 0 }}</p>
+                    </div>
+                    <!-- Total admin Box -->
+                    <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm rounded-lg p-6 h-32 flex flex-col justify-center items-center">
+                        <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300">Total Editors</h3>
+                        <p class="text-2xl pt-4 font-bold text-green-500 dark:text-green-500">{{ $totalAdmin ?? 0 }}</p>
                     </div>
                 </div>
             </div>
