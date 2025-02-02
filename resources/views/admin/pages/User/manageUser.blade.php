@@ -19,76 +19,82 @@
                         <div class="grid grid-cols-2 gap-4">
                             <!-- Category Name -->
                             <div>
-                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">User Name *</label>
+                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">User Name
+                                    *</label>
                                 <input type="text" name="username"
                                     class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
                                     placeholder="Enter User name" required>
                             </div>
-    
+
                             <!-- Icon Name -->
                             <div>
-                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Fullname *</label>
+                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Fullname
+                                    *</label>
                                 <input type="text" name="name"
                                     class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
                                     placeholder="Enter the name">
                             </div>
                         </div>
-    
-                        <!-- Password -->
+                        <!-- Email -->
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Password *</label>
-                            <input type="password" name="password" 
-                            class="w-full px-2 py-1 border border-gray-300
-                             dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100" 
-                             placeholder="Enter the password">
-
+                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                            <input type="text" name="email"
+                                class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
+                                placeholder="Enter Email">
                         </div>
 
-                        <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Confirm Password *</label>
-                            <input type="password" name="password_confirmation" 
-                            class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs
-                             dark:bg-gray-700 dark:text-gray-100" placeholder="Confirm the password">
 
-                        </div>
-    
                         <!-- Email and Contact in the same line -->
                         <div class="grid grid-cols-2 gap-4">
-                            <!-- Email -->
+                            <!-- Password -->
                             <div>
-                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                                <input type="text" name="email"
-                                    class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
-                                    placeholder="Enter Email">
+                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Password
+                                    *</label>
+                                <input type="password" name="password" class="w-full px-2 py-1 border border-gray-300
+                             dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
+                                    placeholder="Enter the password">
+
                             </div>
-    
-                            <!-- Contact -->
+
                             <div>
-                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Contact</label>
-                                <input type="text" name="contact"
-                                    class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
-                                    placeholder="Enter Contact">
+                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Confirm
+                                    Password *</label>
+                                <input type="password" name="password_confirmation" class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs
+                             dark:bg-gray-700 dark:text-gray-100" placeholder="Confirm the password">
+
                             </div>
                         </div>
-                        
+                        <!-- Contact -->
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
+                            <label
+                                class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Contact</label>
+                            <input type="text" name="contact"
+                                class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
+                                placeholder="Enter Contact">
+                        </div>
+
+
+                        <div>
+                            <label
+                                class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
                             <input type="text" name="address"
                                 class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
                                 placeholder="Enter Address">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">User Category *</label>
+                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">User Category
+                                *</label>
                             <select name="role"
-                                class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100" required>
+                                class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
+                                required>
                                 <option value="user">User</option>
                                 <option value="editor">Editor</option>
                             </select>
                         </div>
-                        
-                        
+
+
                     </div>
-                    
+
 
                     <!-- Form Buttons -->
                     <div class="mt-4 flex gap-2">
@@ -107,7 +113,8 @@
                 <!-- Entries Filter -->
                 <div class="mb-3">
                     <label class="text-xs text-gray-700 dark:text-gray-300">Show
-                        <select class="px-1 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100">
+                        <select
+                            class="px-1 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100">
                             <option>5</option>
                             <option>10</option>
                             <option>15</option>
@@ -117,7 +124,7 @@
                 </div>
 
                 <!-- Table Container with Fixed Height -->
-                
+
                 <div class="overflow-y-auto" style="max-height: 400px;">
                     <table class="w-full text-left border-collapse text-xs">
                         <thead>
@@ -141,18 +148,22 @@
                                 <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $user->contact }}</td>
                                 <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">
                                     @if($user->type == 'Editor')
-                                        Editor
+                                    Editor
                                     @else
-                                        User
+                                    User
                                     @endif
                                 </td>
-                                
+
                                 <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">
-                                    <a href="#" class="text-blue-600 hover:text-blue-800">Edit</a>
-                                    <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                    <a href="{{ route('admin.user.edit', $user->id) }}"
+                                        class="text-blue-600 hover:text-blue-800">Edit</a>
+                                    <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST"
+                                        class="inline"
+                                        onsubmit="return confirm('Are you sure you want to delete this category?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-800 ml-2">Delete</button>
+                                        <button type="submit"
+                                            class="text-red-600 hover:text-red-800 ml-2">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -160,21 +171,22 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <!-- Pagination -->
                 <div class="mt-4 flex justify-between items-center text-xs">
                     <div class="text-gray-700 dark:text-gray-300">
-                        Showing {{ $paginated->firstItem() }} to {{ $paginated->lastItem() }} of {{ $paginated->total() }} entries
+                        Showing {{ $paginated->firstItem() }} to {{ $paginated->lastItem() }} of {{ $paginated->total()
+                        }} entries
                     </div>
                     <div class="flex gap-1">
                         {{ $paginated->links() }}
                     </div>
                 </div>
-                
-                            
-                            
+
+
+
             </div>
         </div>
-        
+
     </div>
 </x-admin-app-layout>
