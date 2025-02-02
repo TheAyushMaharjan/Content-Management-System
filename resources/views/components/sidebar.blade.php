@@ -38,8 +38,8 @@
                         </svg>
                         <span x-show="!$store.sidebar.isCollapsed" class="ml-3">User Management</span>
                     </summary>
-                    <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 space-y-1">
-                        <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Manage User</a></li>
+                    <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2  text-sm space-y-1">
+                        <li><a href="{{route('admin.user.manageUser')}}" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Manage User</a></li>
                         <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Manage Permission</a></li>
                     </ul>
                 </details>
@@ -54,7 +54,7 @@
                         </svg>
                         <span x-show="!$store.sidebar.isCollapsed" class="ml-3">Blog Management</span>
                     </summary>
-                    <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 space-y-1">
+                    <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 text-sm space-y-1">
                         <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Blog Category</a></li>
                         <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Blog Setup</a></li>
                     </ul>
@@ -70,7 +70,7 @@
                         </svg>
                         <span x-show="!$store.sidebar.isCollapsed" class="ml-3">Media Management</span>
                     </summary>
-                    <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 space-y-1">
+                    <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 text-sm space-y-1">
                         <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Gallery Category Setup</a></li>
                         <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Preview</a></li>
                     </ul>
@@ -86,7 +86,7 @@
                         </svg>
                         <span x-show="!$store.sidebar.isCollapsed" class="ml-3">Settings</span>
                     </summary>
-                    <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 space-y-1">
+                    <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 text-sm space-y-1">
                         <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Website Heading & Logo Setting</a></li>
                         <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Footer Setting</a></li>
                     </ul>
@@ -96,11 +96,11 @@
         </div>
             <!-- Profile and Logout -->
             <div class="User">
-            <li class="border-t border-gray-600 ">
-                <div class="px-4">
+            <li class=" list-none border-t border-gray-700 ">
+                <div class="px-4 pt-2">
                     <!-- Full Name and Email -->
-                    <div x-show="!$store.sidebar.isCollapsed" class="flex flex-col">
-                        <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
+                    <div x-show="!$store.sidebar.isCollapsed"  class="flex flex-col ">
+                        <div class="font-medium  text-gray-800 dark:text-gray-200 text-sm">{{ Auth::user()->name }}</div>
                         <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                     </div>
                 
@@ -111,18 +111,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col space-y-2">
+                <div class="flex flex-col text-sm space-y-2">
                     <!-- Profile Link -->
-                    <summary :href="route('profile.edit')" class="flex items-center justify-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">
+                    <a href="{{ route('admin.profile.edit') }}" class="flex items-center justify-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" 
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 15v-2m0 6v-2m0-6v-2"/>
                         </svg>
                         <span x-show="!$store.sidebar.isCollapsed" class="ml-3">Profile</span>
-                    </summary>
+                    </a>
+                    
 
                     <!-- Log Out Button -->
-                    <form method="POST" action="{{ route('editor.logout') }}">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="flex items-center justify-center p-2 w-full text-[#9797A4] hover:bg-gray-700 rounded">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" 

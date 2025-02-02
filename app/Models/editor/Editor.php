@@ -18,9 +18,12 @@ class Editor extends Authenticatable
        * @var list<string>
        */
       protected $fillable = [
-          'name',
-          'email',
-          'password',
+        'username',
+        'name',
+        'address',
+        'contact',
+        'email',
+        'password',
       ];
   
       /**

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('editors', function (Blueprint $table) {
             $table->id();
+            $table->string('username')->nullable();
+            $table->string('address')->nullable();
+            $table->string('contact')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
