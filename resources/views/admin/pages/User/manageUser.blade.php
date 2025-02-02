@@ -5,9 +5,11 @@
         </h2>
     </x-slot>
     <div x-data :class="$store.sidebar.isCollapsed ? 'ml-20' : 'ml-10'" class="py-6 transition-all duration-300">
-        <h2 class="font-semibold text-ml text-gray-800 dark:text-gray-900 leading-tight">
-            {{ __("Manage User") }}
-        </h2>
+        
+        <div class="container mx-auto p-4">
+            <h2 class="font-semibold text-ml text-gray-800 dark:text-gray-900 leading-tight">
+                {{ __("Manage User") }}
+            </h2>
         <div class="flex gap-6 pt-6">
             <!-- Form Section with 40% width -->
             <div class="w-full lg:w-2/5 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
@@ -105,11 +107,9 @@
                     </div>
                 </form>
             </div>
-
             <!-- Table Section with 60% width -->
             <div class="w-full lg:w-3/5 bg-white dark:bg-gray-800 p-4 pr-4 rounded-lg shadow-sm">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">USER LIST</h2>
-
                 <!-- Entries Filter -->
                 <div class="mb-3">
                     <label class="text-xs text-gray-700 dark:text-gray-300">Show
@@ -187,6 +187,6 @@
 
             </div>
         </div>
-
+        </div>
     </div>
 </x-admin-app-layout>

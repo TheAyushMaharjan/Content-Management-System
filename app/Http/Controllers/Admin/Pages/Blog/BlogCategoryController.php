@@ -32,27 +32,27 @@ class BlogCategoryController extends Controller
                 'description'=>$validateData['description'] ?? null,
                 'is_published' => $request->input('is_published',0),
             ]);
-            return redirect()->route('admin.blog.blogSetup')->with('success','Blog added Successfully!');
+            return redirect()->route('admin.blog.blogCategory')->with('success','Blog added Successfully!');
         }
         catch(\Exception $e){
             Log::error('Error creating user: ', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            return redirect()->route('admin.blog.blogSetup')->with('error', 'An error occurred while creating the blog. Please try again.');
+            return redirect()->route('admin.blog.blogCategory')->with('error', 'An error occurred while creating the blog. Please try again.');
        
         }
     }
     public function destroy(string $id){
         $data = BlogCategory::where('id',$id)->delete();
-        return redirect()->route('admin.user.blogSetup')->with('success', 'Data deleted successfully.');
+        return redirect()->route('admin.blog.blogCategory')->with('success', 'Data deleted successfully.');
     }
 
 
-    public function storeEdit($id){
+    public function edit($id){
         $blog = BlogCategory::findOrFail($id);
 
-        return view('admin.blog.blogSetupEdit',compact('blog'));
+        return view('admin.blog.blogCategoryEdit',compact('blog'));
     }
 
     public function update(request $request, $id){
@@ -72,7 +72,7 @@ class BlogCategoryController extends Controller
         
         $blog->save();
 
-        return redirect()->route('admin.blog.blogSetup')->with('success', 'Data Updated successfully.');
+        return redirect()->route('admin.blog.blogCategory')->with('success', 'Data Updated successfully.');
 
     }
 
@@ -81,12 +81,12 @@ class BlogCategoryController extends Controller
     public function blogCategory()
 {
     // Retrieve the blogs and categories
+    $catetory_name = BlogCategory::all(); // Adjust the number as per your requirement
+
     $blogsData = BlogCategory::paginate(10); // Adjust the number as per your requirement
 
     // Pass both variables to the view
-    return view('admin.blog.blogCategory', [
-        'blogsData' => $blogsData,
-    ]);
+    return view('admin.pages.blog.blogCategory', ['blogsData' => $blogsData,'catetory_name',$catetory_name]);
 }
     
 }

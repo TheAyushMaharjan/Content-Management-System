@@ -56,7 +56,7 @@
                     </summary>
                     <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 text-sm space-y-1">
                         <li><a href="{{route('admin.blog.blogCategory')}}" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Blog Category</a></li>
-                        <li><a href="#" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Blog Setup</a></li>
+                        <li><a href="{{route('admin.blogSetup.blogSetup')}}" class="flex items-center p-2 text-[#9797A4] hover:bg-gray-700 rounded">Blog Setup</a></li>
                     </ul>
                 </details>
             </li>

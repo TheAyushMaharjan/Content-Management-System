@@ -14,19 +14,23 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full md:w-3/4 lg:w-2/3"> <!-- Adjust width for smaller screens -->
                     <!-- Total Users Box -->
                     <div class="bg-white dark:bg-gray-100 border border-gray-200 shadow-sm rounded-lg p-6 h-32 flex flex-col justify-center items-center">
+                        <i class="fa-solid fa-user fa-2x text-gray-800 pt-3"></i>
                         <h3 class="text-xl font-semibold text-gray-300 dark:text-gray-800">Total Users</h3>
-                        <p class="text-2xl pt-4 font-bold text-green-500 dark:text-green-500">{{ $totalUser ?? 0}}</p>
+                        <p class="text-2xl pt-2 font-bold text-green-500 dark:text-green-500">{{ $totalUser ?? 0}}</p>
                     </div>
         
                     <!-- Total editor Box -->
                     <div class="bg-white dark:bg-gray-100 border border-gray-200  shadow-sm rounded-lg p-6 h-32 flex flex-col justify-center items-center">
+                        <i class="fa-solid fa-user-pen fa-2x pt-3 text-gray-800"></i>
                         <h3 class="text-xl font-semibold text-gray-300 dark:text-gray-800">Total Editors</h3>
-                        <p class="text-2xl pt-4 font-bold text-green-500 dark:text-green-500">{{ $totalEditor ?? 0 }}</p>
+                        <p class="text-2xl pt-2 font-bold text-green-500 dark:text-green-500">{{ $totalEditor ?? 0 }}</p>
                     </div>
                     <!-- Total admin Box -->
                     <div class="bg-white dark:bg-gray-100 border border-gray-200  shadow-sm rounded-lg p-6 h-32 flex flex-col justify-center items-center">
+                        <i class="fa-solid fa-user-secret fa-2x pt-3 text-gray-800"></i>
+
                         <h3 class="text-xl font-semibold text-gray-300 dark:text-gray-800">Total Admin</h3>
-                        <p class="text-2xl pt-4 font-bold text-green-500 dark:text-green-500">{{ $totalAdmin ?? 0 }}</p>
+                        <p class="text-2xl pt-2 font-bold text-green-500 dark:text-green-500">{{ $totalAdmin ?? 0 }}</p>
                     </div>
                 </div>
             </div>
