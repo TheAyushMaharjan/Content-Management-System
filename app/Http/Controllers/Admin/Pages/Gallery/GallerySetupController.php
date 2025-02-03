@@ -62,10 +62,10 @@ class GallerySetupController extends Controller
 
     public function edit($id){
         $blogsData = GallerySetup::findOrFail($id);
-        $category_name = GalleryCategory::where('is_published',1)->get(); 
+        $gallery_category = GalleryCategory::where('is_published',1)->get(); 
         return view('admin.pages.media.gallerySetupEdit', [
             'blogsData' => $blogsData,
-            'category_name' => $category_name
+            'gallery_category' => $gallery_category
         ]);
     }
 
@@ -99,9 +99,8 @@ class GallerySetupController extends Controller
 
         // Save the updated category
         $category->save();
-
-        // Redirect with success message
-        return redirect()->route('admin.gallerySetup.edit')->with('success', 'Category updated successfully.');
+        return redirect()->route('admin.gallerySetup.edit', ['id' => $category->id])
+        ->with('success', 'Data updated successfully.');
     }
     public function gallerySetup(){
         $mediaData =GallerySetup::paginate(10);

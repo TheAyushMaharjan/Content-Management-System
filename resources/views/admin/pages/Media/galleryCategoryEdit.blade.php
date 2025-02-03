@@ -15,7 +15,7 @@
                 <!-- Scrollable Form Container -->
                 <div class="overflow-y-auto max-h-[calc(100vh-200px)] p-4 bg-white rounded-lg shadow-md">
                     <!-- Edit Form -->
-                    <form action="{{ route('admin.blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.galleryCategory.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         @if ($errors->any())
@@ -30,22 +30,15 @@
 
                         <!-- Blog Category Dropdown -->
                         <div class="mb-4">
-                            <label for="category_name" class="block text-sm font-medium text-gray-700">Category Name</label>
-                            <input type="text" id="category_name" name="category_name" value="{{ $blog->category_name }}"
+                            <label for="gallery_category" class="block text-sm font-medium text-gray-700">Gallery Category</label>
+                            <input type="text" id="gallery_category" name="gallery_category" value="{{ $blog->gallery_category }}"
                                    class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         </div>
 
                         <!-- Blog Title Input -->
                         <div class="mb-4">
-                            <label for="icon_name" class="block text-sm font-medium text-gray-700">Icon Name</label>
-                            <input type="text" id="icon_name" name="icon_name" value="{{ $blog->icon_name }}"
-                                   class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        </div>
-
-                        <!-- Blog Title Input -->
-                        <div class="mb-4">
-                            <label for="description" class="block text-sm font-medium text-gray-700">Content</label>
-                            <input type="text" id="description" name="description" value="{{ $blog->description }}"
+                            <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                            <input type="text" id="content" name="content" value="{{ $blog->content }}"
                                    class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         </div>
 
@@ -66,14 +59,13 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            // JavaScript to handle the toggle switch
-            document.getElementById('toggle_published').addEventListener('change', function () {
-                const isPublishedInput = document.getElementById('is_published');
-                // Update the hidden input value based on the checkbox state
-                isPublishedInput.value = this.checked ? '1' : '0';
-            });
-        </script>
     </body>
+    <script>
+        document.getElementById('toggle_published').addEventListener('click', function () {
+            const isPublishedInput = document.getElementById('is_published');
+            const isPublished = isPublishedInput.value === '1';
+            isPublishedInput.value = isPublished ? '0' : '1';
+            this.setAttribute('aria-pressed', !isPublished);
+        });
+    </script>
 </x-admin-app-layout>

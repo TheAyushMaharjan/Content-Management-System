@@ -1,6 +1,6 @@
 <x-admin-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-900 leading-tight">
+        <h2 class="font-semibold text-xl text-[#E0E1DD] dark:text-[#E0E1DD] leading-tight">
             {{ __('Blog Management') }}
         </h2>
     </x-slot>
@@ -24,7 +24,7 @@
                     </ul>
                 </div>
                 @endif
-                <h2 class="font-bold text-l  un text-gray-800 pt-3 dark:text-gray-900 leading-tight">
+                <h2 class="font-bold text-xl  text-gray-800 pt-3 dark:text-gray-900 leading-tight">
                     {{ __("Blog Category") }}
                 </h2>
                 <!-- Flexbox Layout for Form and Table -->

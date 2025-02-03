@@ -124,83 +124,68 @@
                         </div>
     
                     <!-- Category List Table (right side) -->
-                    <div class="w-full lg:w-6/5 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-                        <table class="w-full">
-                            <thead>
-                                <th class="text-gray-700 dark:text-gray-100 text-xm font-medium py-2">Category List</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="overflow-y-auto max-h-96">
-                                            <table id="categoryTable" class="w-full text-left border-collapse text-xs border border-gray-300 dark:border-gray-600">
-                                                <thead>
-                                                    <tr class="bg-gray-100 dark:bg-gray-700">
-                                                        <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Category</th>
-                                                        <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Title</th>
-                                                        <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Slug </th>
-                                                        <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Content</th>
-                                                        <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Image</th>
-                                                        <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Author</th>
-                                                        <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Status</th>
-                                                        <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Action</th>
-
-
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($blogsData as $category)
-                                                        <tr class="hover:bg-gray-200 dark:hover:bg-gray-600 border-b">
-                                                            <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $category->category_id }}</td>
-                                                            <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $category->title }}</td>
-                                                            <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $category->slug }}</td>
-                                                            <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $category->content }}</td>
-                                                            <td class="py-2 px-4 border-b">
-                                                                @if($category->image)
-                                                                    <img src="{{ asset('storage/' . $category->image) }}" alt="Blog Image" class="w-16 h-16 object-cover">
-                                                                @else
-                                                                    No Image
-                                                                @endif
-                                                            </td>                                                            <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $category->author }}</td>
-                                                            <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">
-                                                                <span class="text-xs font-semibold {{ $category->is_published ? 'text-green-500' : 'text-red-500' }}">
-                                                                    {{ $category->is_published ? 'Published' : 'Draft' }}
-                                                                </span>
-                                                            </td>
-                                                            <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border flex items-center space-x-2">
-                                                                
-                                                                <a href="{{ route('admin.blogSetup.edit', $category->id) }}"
-                                                                    class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
-                                                                
-                                                              <form action="{{ route('admin.blogSetup.destroy', $category->id) }}" method="POST" class="inline" 
-                                                                      onsubmit="return confirm('Are you sure you want to delete this category?');">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="text-red-600 hover:text-red-800">Delete</button>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    
-                                        <!-- Pagination -->
-                                        <div class="mt-4 flex justify-between items-center text-xs">
-                                            <div class="text-gray-700 dark:text-gray-300">
-                                                Showing {{ $blogsData->firstItem() }} to {{ $blogsData->lastItem() }} of {{ $blogsData->total() }} entries
-                                            </div>
-                                            <div class="flex gap-1">
-                                                {{ $blogsData->links() }}
-                                            </div>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="w-full lg:w-6/5 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <h2 class="text-gray-800 text-center dark:text-gray-100 text-2xl font-semibold mb-4">Category List</h2>
+                    
+                        <div class="overflow-y-auto max-h-96 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <table id="categoryTable" class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-gray-100 dark:bg-gray-700">
+                                        <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Category</th>
+                                        <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Title</th>
+                                        <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Slug</th>
+                                        <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Content</th>
+                                        <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Image</th>
+                                        <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Author</th>
+                                        <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Status</th>
+                                        <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($blogsData as $category)
+                                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 border-b dark:border-gray-700">
+                                            <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $category->category_id }}</td>
+                                            <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $category->title }}</td>
+                                            <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $category->slug }}</td>
+                                            <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $category->content }}</td>
+                                            <td class="px-5 py-3">
+                                                @if($category->image)
+                                                    <img src="{{ asset('storage/' . $category->image) }}" alt="Blog Image" class="w-16 h-16 object-cover">
+                                                @else
+                                                    No Image
+                                                @endif
+                                            </td>
+                                            <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $category->author }}</td>
+                                            <td class="px-5 py-3">
+                                                <span class="px-2 py-1 rounded-full text-xs font-medium {{ $category->is_published ? 'bg-green-100 text-green-600 dark:bg-green-600 dark:text-green-100' : 'bg-red-100 text-red-600 dark:bg-red-600 dark:text-red-100' }}">
+                                                    {{ $category->is_published ? 'Published' : 'Draft' }}
+                                                </span>
+                                            </td>
+                                            <td class="px-5 py-3 flex items-center space-x-3">
+                                                <a href="{{ route('admin.blogSetup.edit', $category->id) }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
+                                                <form action="{{ route('admin.blogSetup.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                        <!-- Pagination -->
+                        <div class="mt-4 flex justify-between items-center text-xs">
+                            <div class="text-gray-700 dark:text-gray-300">
+                                Showing {{ $blogsData->firstItem() }} to {{ $blogsData->lastItem() }} of {{ $blogsData->total() }} entries
+                            </div>
+                            <div class="flex gap-1">
+                                {{ $blogsData->links() }}
+                            </div>
+                        </div>
                     </div>
+                    
                 </div>
 
                 </div>

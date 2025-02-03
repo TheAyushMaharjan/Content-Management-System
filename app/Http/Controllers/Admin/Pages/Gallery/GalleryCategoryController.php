@@ -47,18 +47,18 @@ class GalleryCategoryController extends Controller
     public function edit($id){
         $blog = GalleryCategory::findOrFail($id);
 
-        return view('admin.galleryCategory.edit',compact('blog'));
+        return view('admin.pages.media.galleryCategoryEdit',compact('blog'));
     }
 
     public function update(request $request, $id){
         $validateData = $request->validate([
             'gallery_category'=>'required|string|min:3',
                 'content'=>'required|string|min:3',
-            'is_published' => 'nullable|in:0,1',
+                'is_published' => 'nullable|boolean',
 
         ]);
         $blog = GalleryCategory::findOrFail($id);
-        $blog->is_published = $request->filled('is_published') ? 1 : 0; // Corrected column name
+        $blog->is_published = $request->is_published ? 1 : 0; // Corrected column name
         $blog->gallery_category  = $request->gallery_category ; // Corrected column name
         $blog->content  = $request->content ; // Corrected column name
 
