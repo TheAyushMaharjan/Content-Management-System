@@ -32,7 +32,7 @@
                         <!-- Category Management Form Table (left side) -->
 
                         <div class="w-full lg:w-2/5 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-                            <form action="{{ route('admin.blogSetup.store') }}" method="POST" enctype="multipart/form-data>
+                            <form action="{{ route('admin.blogSetup.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="space-y-2">
                                     <div class="mb-4">
@@ -133,7 +133,7 @@
                                 <tr>
                                     <td>
                                         <div class="overflow-y-auto max-h-96">
-                                            <table class="w-full text-left border-collapse text-xs border border-gray-300 dark:border-gray-600">
+                                            <table id="categoryTable" class="w-full text-left border-collapse text-xs border border-gray-300 dark:border-gray-600">
                                                 <thead>
                                                     <tr class="bg-gray-100 dark:bg-gray-700">
                                                         <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Category</th>
@@ -170,11 +170,9 @@
                                                             </td>
                                                             <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border flex items-center space-x-2">
                                                                 
-                                                                <form action="{{ route('admin.blogSetup.edit', $category->id) }}" method="POST" class="inline">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <button type="submit" class="text-blue-600 hover:text-blue-800">Edit</button>
-                                                                </form>
+                                                                <a href="{{ route('admin.blogSetup.edit', $category->id) }}"
+                                                                    class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
+                                                                
                                                               <form action="{{ route('admin.blogSetup.destroy', $category->id) }}" method="POST" class="inline" 
                                                                       onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                                     @csrf

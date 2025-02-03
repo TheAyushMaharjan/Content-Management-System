@@ -52,7 +52,7 @@ class BlogCategoryController extends Controller
     public function edit($id){
         $blog = BlogCategory::findOrFail($id);
 
-        return view('admin.blog.blogCategoryEdit',compact('blog'));
+        return view('admin.pages.blog.blogCategoryEdit',compact('blog'));
     }
 
     public function update(request $request, $id){
@@ -64,6 +64,8 @@ class BlogCategoryController extends Controller
 
         ]);
         $blog = BlogCategory::findOrFail($id);
+        \Log::info("Updating blog category ID: {$id}");
+
         $blog->is_published = $request->filled('is_published') ? 1 : 0; // Corrected column name
         $blog->category_name  = $request->category_name ; // Corrected column name
         $blog->icon_name  = $request->icon_name ; // Corrected column name
@@ -71,6 +73,8 @@ class BlogCategoryController extends Controller
 
         
         $blog->save();
+        \Log::info("Blog updated successfully: ", $blog->toArray());
+
 
         return redirect()->route('admin.blog.blogCategory')->with('success', 'Data Updated successfully.');
 

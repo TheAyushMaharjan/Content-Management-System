@@ -1,7 +1,7 @@
 <x-admin-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-900 leading-tight">
-            {{ __('Blog Management') }}
+        <h2 class="font-semibold text-xl text-[#E0E1DD] dark:text-[#E0E1DD] leading-tight">
+            {{ __('Media Management') }}
         </h2>
     </x-slot>
     <div x-data :class="$store.sidebar.isCollapsed ? 'ml-20' : 'ml-10'" class="py-6 transition-all duration-300">
@@ -24,41 +24,31 @@
                     </ul>
                 </div>
                 @endif
-                <h2 class="font-bold text-l  un text-gray-800 pt-3 dark:text-gray-900 leading-tight">
-                    {{ __("Blog Category") }}
+                <h2 class="font-bold text-xl  un text-gray-800 pt-3 dark:text-gray-900 leading-tight">
+                    {{ __("Gallery Category") }}
                 </h2>
                 <!-- Flexbox Layout for Form and Table -->
                 <div class="flex gap-6 pt-6">
                     <!-- Category Management Form Table (left side) -->
-                    <div class="w-full lg:w-2/5 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-                        <form action="{{ route('admin.blog.store') }}" method="POST">
+                    <div class="w-full lg:w-2/5 bg-white dark:bg-[#1B263B] p-4 rounded-lg shadow-sm">
+                        <form action="{{ route('admin.galleryCategory.store') }}" method="POST">
                             @csrf
                             <div class="space-y-2">
                                 <h2 class="text-gray-700 text-center dark:text-gray-100 text-2xl font-bold py-2">
                                     Category Form</h2>
                                 <div>
                                     <label
-                                        class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Category
-                                        Name *</label>
-                                    <input type="text" name="category_name"
+                                        class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Gallery Category*</label>
+                                    <input type="text" name="gallery_category"
                                         class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
                                         placeholder="Enter Category Name" required>
                                 </div>
 
                                 <div>
-                                    <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Icon
-                                        Name *</label>
-                                    <input type="text" name="icon_name"
+                                    <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Content*</label>
+                                    <input type="text" name="content"
                                         class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
-                                        placeholder="Enter Icon Name (e.g., fa fa-icon)" required>
-                                </div>
-
-                                <div>
-                                    <label
-                                        class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
-                                    <textarea name="description"
-                                        class="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100"
-                                        placeholder="Enter Description" style="resize: none;"></textarea>
+                                        placeholder="Enter the content" required>
                                 </div>
 
                                 <!-- Toggle Switch for Publish -->
@@ -91,8 +81,8 @@
                     </div>
 
                     <!-- Category List Table (right side) -->
-                    <div class="w-full lg:w-3/5 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
-                        <h2 class="text-gray-800 text-center dark:text-gray-100 text-2xl font-semibold mb-4">Category
+                    <div class="w-full lg:w-3/5 bg-white dark:bg-[#1B263B] p-6 rounded-2xl shadow-lg">
+                        <h2 class="text-gray-800 text-center dark:text-gray-100 text-2xl font-semibold mb-4">Gallery Category
                             List</h2>
 
                         <div class="overflow-y-auto max-h-96 rounded-lg border border-gray-200 dark:border-gray-700">
@@ -101,13 +91,11 @@
                                     <tr class="bg-gray-100 dark:bg-gray-700">
                                         <th
                                             class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">
-                                            Category Name</th>
+                                            Gallery Category</th>
                                         <th
                                             class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">
-                                            Icon Name</th>
-                                        <th
-                                            class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">
-                                            Description</th>
+                                            Content</th>
+                                        
                                         <th
                                             class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">
                                             Status</th>
@@ -121,11 +109,10 @@
                                     <tr
                                         class="hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 border-b dark:border-gray-700">
                                         <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{
-                                            $category->category_name }}</td>
-                                        <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $category->icon_name
+                                            $category->gallery_category }}</td>
+                                        <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $category->content
                                             }}</td>
-                                        <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $category->description
-                                            }}</td>
+                                        
                                         <td class="px-5 py-3">
                                             <span
                                                 class="px-2 py-1 rounded-full text-xs font-medium {{ $category->is_published ? 'bg-green-100 text-green-600 dark:bg-green-600 dark:text-green-100' : 'bg-red-100 text-red-600 dark:bg-red-600 dark:text-red-100' }}">
@@ -134,9 +121,9 @@
                                         </td>
                                         <td class="px-5 py-3 flex items-center space-x-3">
                                             
-                                            <a href="{{ route('admin.blog.edit', $category->id) }}"
+                                            <a href="{{ route('admin.galleryCategory.edit', $category->id) }}"
                                                 class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
-                                            <form action="{{ route('admin.blog.destroy', $category->id) }}"
+                                            <form action="{{ route('admin.galleryCategory.destroy', $category->id) }}"
                                                 method="POST" class="inline"
                                                 onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                 @csrf

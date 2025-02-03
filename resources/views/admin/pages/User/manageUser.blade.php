@@ -111,22 +111,12 @@
             <div class="w-full lg:w-3/5 bg-white dark:bg-gray-800 p-4 pr-4 rounded-lg shadow-sm">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">USER LIST</h2>
                 <!-- Entries Filter -->
-                <div class="mb-3">
-                    <label class="text-xs text-gray-700 dark:text-gray-300">Show
-                        <select
-                            class="px-1 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs dark:bg-gray-700 dark:text-gray-100">
-                            <option>5</option>
-                            <option>10</option>
-                            <option>15</option>
-                        </select>
-                        entries
-                    </label>
-                </div>
+                
 
                 <!-- Table Container with Fixed Height -->
 
                 <div class="overflow-y-auto" style="max-height: 400px;">
-                    <table class="w-full text-left border-collapse text-xs">
+                    <table  id="categoryTable"class="w-full text-left border-collapse text-xs">
                         <thead>
                             <tr class="bg-gray-100 dark:bg-gray-700">
                                 <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Username</th>

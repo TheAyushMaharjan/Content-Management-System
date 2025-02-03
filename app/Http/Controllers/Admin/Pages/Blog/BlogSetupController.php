@@ -57,14 +57,17 @@ class BlogSetupController extends Controller
 }
     
     public function destroy(string $id){
-        $data = BlogCategory::where('id',$id)->delete();
+        $data = BlogSetup::where('id',$id)->delete();
         return redirect()->route('admin.blogSetup.blogSetup')->with('success', 'Data deleted successfully.');
     }
 
     public function edit($id){
-        $blogsData = BlogCategory::findOrFail($id);
-
-        return view('admin.blogSetup.blogSetup ',compact('blogsData'));
+        $blogsData = BlogSetup::findOrFail($id);
+        $category_name = BlogCategory::where('is_published',1)->get(); 
+        return view('admin.pages.blog.blogSetupEdit', [
+            'blogsData' => $blogsData,
+            'category_name' => $category_name
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -80,7 +83,7 @@ class BlogSetupController extends Controller
             'is_published'  => 'required|boolean',
         ]);
     
-        $blog = BlogCategory::findOrFail($id);
+        $blog = BlogSetup::findOrFail($id);
     
         // Handle image upload
         if ($request->hasFile('image')) {
@@ -99,11 +102,12 @@ class BlogSetupController extends Controller
             'image'         => $validateData['image'] ?? $blog->image, // Keep old image if not updated
         ]);
     
-        return redirect()->route('admin.blog.blogCategoryEdit')->with('success', 'Data updated successfully.');
-    }
+        return redirect()->route('admin.blogSetup.edit', ['id' => $blog->id])
+        ->with('success', 'Data updated successfully.');
+}
     public function BlogSetup(){
         $blogsData =BlogSetup::paginate(10);
-        $category_name = BlogCategory::all(); // Assuming you want categories from the BlogCategory model
+        $category_name = BlogCategory::where('is_published',1)->get(); 
         return view('admin.pages.blog.blogSetup', [
             'blogsData' => $blogsData,
             'category_name' => $category_name
