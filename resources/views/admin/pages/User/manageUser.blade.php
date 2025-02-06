@@ -1,13 +1,13 @@
 <x-admin-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-900 leading-tight">
+        <h2 class="font-semibold text-xl text-[#E0E1DD] dark:text-[#E0E1DD] leading-tight">
             {{ __('User Management') }}
         </h2>
     </x-slot>
     <div x-data :class="$store.sidebar.isCollapsed ? 'ml-20' : 'ml-10'" class="py-6 transition-all duration-300">
         
         <div class="container mx-auto p-4">
-            <h2 class="font-semibold text-ml text-gray-800 dark:text-gray-900 leading-tight">
+            <h2 class="font-bold text-xl text-gray-800 dark:text-gray-900 leading-tight">
                 {{ __("Manage User") }}
             </h2>
         <div class="flex gap-6 pt-6">
@@ -108,74 +108,63 @@
                 </form>
             </div>
             <!-- Table Section with 60% width -->
-            <div class="w-full lg:w-3/5 bg-white dark:bg-gray-800 p-4 pr-4 rounded-lg shadow-sm">
-                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">USER LIST</h2>
-                <!-- Entries Filter -->
-                
-
+            <div class="w-full lg:w-3/5 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                <h2 class="text-gray-800 text-center dark:text-gray-100 text-2xl font-semibold mb-4">USER LIST</h2>
+            
                 <!-- Table Container with Fixed Height -->
-
-                <div class="overflow-y-auto" style="max-height: 400px;">
-                    <table  id="categoryTable"class="w-full text-left border-collapse text-xs">
+                <div class="overflow-y-auto max-h-96 rounded-lg border border-gray-200 dark:border-gray-700">
+                    <table id="categoryTable" class="w-full text-left border-collapse text-xs">
                         <thead>
                             <tr class="bg-gray-100 dark:bg-gray-700">
-                                <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Username</th>
-                                <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Fullname</th>
-                                <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Email</th>
-                                <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Address</th>
-                                <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Contact</th>
-                                <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Role</th>
-                                <th class="px-3 py-2 font-medium text-gray-700 dark:text-gray-100 border">Action</th>
+                                <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Username</th>
+                                <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Fullname</th>
+                                <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Email</th>
+                                <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Address</th>
+                                <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Contact</th>
+                                <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Role</th>
+                                <th class="px-5 py-3 text-sm font-semibold text-gray-700 dark:text-gray-100 border-b dark:border-gray-600">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($paginated as $index => $user)
-                            <tr class="hover:bg-gray-700">
-                                <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $user->username }}</td>
-                                <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $user->name }}</td>
-                                <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $user->email }}</td>
-                                <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $user->address }}</td>
-                                <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">{{ $user->contact }}</td>
-                                <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">
-                                    @if($user->type == 'Editor')
-                                    Editor
-                                    @else
-                                    User
-                                    @endif
-                                </td>
-
-                                <td class="px-3 py-2 text-gray-700 dark:text-gray-100 border">
-                                    <a href="{{ route('admin.user.edit', $user->id) }}"
-                                        class="text-blue-600 hover:text-blue-800">Edit</a>
-                                    <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST"
-                                        class="inline"
-                                        onsubmit="return confirm('Are you sure you want to delete this category?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="text-red-600 hover:text-red-800 ml-2">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 border-b dark:border-gray-700">
+                                    <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $user->username }}</td>
+                                    <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $user->name }}</td>
+                                    <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $user->email }}</td>
+                                    <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $user->address }}</td>
+                                    <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $user->contact }}</td>
+                                    <td class="px-5 py-3 text-gray-800 dark:text-gray-100">
+                                        @if($user->type == 'Editor')
+                                            Editor
+                                        @else
+                                            User
+                                        @endif
+                                    </td>
+                                    <td class="px-5 py-3 flex items-center space-x-3">
+                                        <a href="{{ route('admin.user.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
+                                        <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors ml-2">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-
+            
                 <!-- Pagination -->
                 <div class="mt-4 flex justify-between items-center text-xs">
                     <div class="text-gray-700 dark:text-gray-300">
-                        Showing {{ $paginated->firstItem() }} to {{ $paginated->lastItem() }} of {{ $paginated->total()
-                        }} entries
+                        Showing {{ $paginated->firstItem() }} to {{ $paginated->lastItem() }} of {{ $paginated->total() }} entries
                     </div>
                     <div class="flex gap-1">
                         {{ $paginated->links() }}
                     </div>
                 </div>
-
-
-
             </div>
+            
         </div>
         </div>
     </div>

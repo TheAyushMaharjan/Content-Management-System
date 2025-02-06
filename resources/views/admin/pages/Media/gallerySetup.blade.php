@@ -154,11 +154,9 @@
                                             </span>
                                         </td>
                                         <td class="px-5 py-3 flex justify-center items-center space-x-3">
-                                            <form action="{{ route('admin.blogSetup.edit', $category->id) }}" method="POST" class="inline">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</button>
-                                            </form>
+                                            <a href="{{ route('admin.gallerySetup.edit', $category->id) }}"
+                                                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
+                                            
                                             <form action="{{ route('admin.gallerySetup.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                 @csrf
                                                 @method('DELETE')
