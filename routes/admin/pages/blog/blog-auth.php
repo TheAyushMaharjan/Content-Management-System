@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\pages\Blog\BlogCategoryController;
 use App\Http\Controllers\admin\pages\Blog\BlogSetupController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
     Route::prefix('blog')->name('blog.')->group(function () {
         Route::get('/blogCategory', [BlogCategoryController::class, 'blogCategory'])->name('blogCategory'); // Manage Users
@@ -15,7 +16,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     
     });
     Route::prefix('blogSetup')->name('blogSetup.')->group(function () {
-
     Route::get('/blogSetup', [BlogSetupController::class, 'blogSetup'])->name('blogSetup'); // Manage Users
     Route::post('/store', [BlogSetupController::class, 'store'])->name('store');
     Route::delete('/destroy/{id}', [BlogSetupController::class, 'destroy'])->name('destroy');

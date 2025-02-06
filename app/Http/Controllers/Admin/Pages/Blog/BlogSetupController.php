@@ -113,4 +113,20 @@ class BlogSetupController extends Controller
             'category_name' => $category_name
         ]);
         }
+
+        public function frontDisplay(Request $request)
+{
+    $blogs = BlogSetup::where('is_published',1)->paginate(10); 
+
+    $blogs->getCollection()->transform(function ($blog) {
+        $blog->image = $blog->image ? asset('storage/' . $blog->image) : null;
+        return $blog;
+    });
+
+    return response()->json($blogs);
+}
+
+        
+
+
 }
