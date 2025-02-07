@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\admin\pages\Gallery;
 
-use App\Models\cr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -57,7 +56,7 @@ class GallerySetupController extends Controller
     
     public function destroy(string $id){
         $data = GallerySetup::where('id',$id)->delete();
-        return redirect()->route('admin.blogSetup.blogSetup')->with('success', 'Data deleted successfully.');
+        return redirect()->route('admin.gallerySetup.gallerySetup')->with('success', 'Data deleted successfully.');
     }
 
     public function edit($id){
@@ -110,6 +109,17 @@ class GallerySetupController extends Controller
             'mediaData' => $mediaData,
             'gallery_category' => $gallery_category
         ]);
+        }
+
+        public function galleryDisplay(request $request){
+            $heros = GallerySetup::where('category_id',3)->paginate(10); 
+
+            // $heros = GallerySetup::paginate(10);
+            $heros->getCollection()->transform(function ($hero) {
+                $hero->image = $hero->image ? asset('storage/' . $hero->image) : null;
+                return $hero;
+            });
+            return response()->json($heros);
         }
 
 }

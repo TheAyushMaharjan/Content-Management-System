@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\pages\Gallery\GallerySetupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\pages\Blog\BlogSetupController;
@@ -18,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/blogSetup/frontDisplay', [BlogSetupController::class, 'frontDisplay'])->name('frontDisplay'); // Manage Users
+Route::get('/gallerySetup/galleryDisplay', [GallerySetupController::class, 'galleryDisplay'])->name('galleryDisplay'); // Manage Users
+
 
 
 require __DIR__.'/auth.php';

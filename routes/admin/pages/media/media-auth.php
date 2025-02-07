@@ -18,7 +18,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     Route::get('/gallerySetup', [GallerySetupController::class, 'gallerySetup'])->name('gallerySetup'); // Manage Users
     Route::post('/store', [GallerySetupController::class, 'store'])->name('store');
-    Route::delete('/destroy/{id}', [BlogSetupController::class, 'destroy'])->name('destroy');
+    Route::delete('/destroy/{id}', [GallerySetupController::class, 'destroy'])->name('destroy');
     Route::put('/update/{id}', [GallerySetupController::class, 'update'])->name('update');
     Route::get('/edit/{id}', [GallerySetupController::class, 'edit'])->name('edit');
 });

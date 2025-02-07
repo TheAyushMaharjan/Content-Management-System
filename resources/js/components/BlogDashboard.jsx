@@ -10,8 +10,8 @@ function BlogDashboard() {
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/blogSetup/frontDisplay')
       .then((response) => {
-        console.log('Response Data:', response.data); // Log response data
-        const blogsData = response.data.data;  // Access 'data' directly, not 'blogsData'
+        console.log('Response Data:', response.data); 
+        const blogsData = response.data.data;  
         if (Array.isArray(blogsData) && blogsData.length > 0) {
           setBlogSetup(blogsData);
         } else {
@@ -19,128 +19,48 @@ function BlogDashboard() {
         }
       })
       .catch((err) => {
-        console.log('Error fetching data:', err);  // Log the error details
+        console.log('Error fetching data:', err);  
         setError(err.message || 'Error fetching data');
       })
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div>Loading blog setup...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className="flex justify-center items-center h-screen">Loading blog setup...</div>;
+  if (error) return <div className="text-red-500 text-center font-bold my-10">{error}</div>;
 
   return (
-    <div className="dashboard">
+    <div className="container mx-auto px-8 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {blogSetup && blogSetup.length > 0 ? (
         blogSetup.map((blog, index) => (
-          <div key={index} className="card">
-            <div className="card-header">
-              <h2>{blog.title}</h2>
-              <p className="author">Author: {blog.author}</p>
+          <div 
+            key={index} 
+            className="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
+          >
+            <div className=" bg-gray-100 p-4">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">{blog.title}</h2>
+              <p className="text-gray-500 text-sm mb-4">{`Author: ${blog.author}`}</p>
             </div>
-            <div className="card-body">
-              <p className="slug">{blog.slug}</p>
-              <div className="content">
-                <p>{blog.content}</p>
-              </div>
+            <div className="p-4">
               {blog.image && (
-            <img className="blog-image" src={blog.image} alt={blog.title} />
-)}
-
+                <img 
+                  className="object-cover w-full h-64 rounded-lg mx-auto my-4" 
+                  src={blog.image} 
+                  alt={blog.title} 
+                />
+              )}
             </div>
-            <div className="card-footer">
-              <button>Read More</button>
+            <div className="bg-gray-100 p-4 border-t border-gray-200 text-right">
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition-colors w-32">
+                Read More
+              </button>
             </div>
           </div>
         ))
       ) : (
-        <div>No blogs available</div>
+        <div className="text-gray-500 text-center font-bold my-10">
+          No blogs available
+        </div>
       )}
-      
-      <style>{`
-        .dashboard {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-around;
-          padding: 20px;
-        }
-
-        .card {
-          width: 300px;
-          margin: 20px;
-          background-color: #fff;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          overflow: hidden;
-          transition: transform 0.3s ease-in-out;
-        }
-
-        .card:hover {
-          transform: scale(1.05);
-        }
-
-        .card-header {
-          background-color: #f5f5f5;
-          padding: 20px;
-          text-align: center;
-        }
-
-        .card-header h2 {
-          margin: 0;
-          font-size: 1.5rem;
-          color: #333;
-        }
-
-        .card-header .author {
-          margin: 10px 0;
-          font-size: 1rem;
-          color: #555;
-        }
-
-        .card-body {
-          padding: 20px;
-          color: #333;
-        }
-
-        .slug {
-          font-style: italic;
-          font-size: 1.1rem;
-          margin-bottom: 10px;
-          color: #777;
-        }
-
-        .content {
-          font-size: 1rem;
-          line-height: 1.5;
-          margin-bottom: 20px;
-        }
-
-        .blog-image {
-          width: 100%;
-          height: auto;
-          border-radius: 8px;
-          margin-top: 15px;
-        }
-
-        .card-footer {
-          background-color: #f5f5f5;
-          padding: 10px;
-          text-align: center;
-        }
-
-        .card-footer button {
-          background-color: #007bff;
-          color: white;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-        }
-
-        .card-footer button:hover {
-          background-color: #0056b3;
-        }
-      `}</style>
     </div>
   );
 }
