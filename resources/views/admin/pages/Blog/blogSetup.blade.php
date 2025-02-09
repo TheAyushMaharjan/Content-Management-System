@@ -15,11 +15,12 @@
                     {{ session('success') }}
                 </div>
                 @endif
+
                 @if ($errors->any())
                 <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-2 mb-4 rounded text-xs">
                     <ul>
                         @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                            <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
