@@ -47,18 +47,18 @@ function Hero() {
 
     // Render the gallery content
     return (
-        <div name='home' className="w-full h-[80vh] flex items-center justify-center bg-white p-8">
+        <div name='home' className="w-full h-[80vh] flex items-center justify-center bg-gradient-to-b from-[#454839] to-black p-8">
             {gallerySetup.length > 0 && (
                 <div className="column flex">
                     <div className="flex flex-col md:flex-row max-w-6xl w-full h-full items-center gap-8">
                         <div className="flex md:w-2/3 flex-col gap-4 p-1"> 
                             <div className="text-left">
-                                <h2 className="text-4xl font-bold">
+                                <h2 className="text-4xl font-bold text-gray-100">
                                     {gallerySetup[currentIndex].title}
                                 </h2>
                             </div>
                             <div className="text-left">
-                                <p className="text-2xl">
+                                <p className="text-2xl text-gray-100">
                                     {gallerySetup[currentIndex].slug}
                                 </p>
                             </div>

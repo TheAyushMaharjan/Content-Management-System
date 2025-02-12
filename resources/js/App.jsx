@@ -8,6 +8,7 @@ import Hero from "./components/Hero";
 import Nav from "./components/Nav";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Form from "./components/Form";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
         <Nav/>
         <Hero/>
         <BlogDashboard/>
+        <Form/>
         <Footer/>
         </>
     );

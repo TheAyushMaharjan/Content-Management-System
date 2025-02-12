@@ -43,41 +43,48 @@ function BlogDashboard() {
   }
 
   return (
-    <div name='blog' className="container mx-auto px-8 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      {blogSetup && blogSetup.length > 0 ? (
-        blogSetup.map((blog, index) => (
-          <div
-            key={index}
-            className="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
-          >
-            <div className=" bg-gray-100 p-4">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">{blog.title}</h2>
-              <p className="text-gray-500 text-sm mb-4">{`Author: ${blog.author}`}</p>
+    <div name="blog" className="w-full px-4 sm:px-8 bg-gradient-to-b from-black to-[#454839] py-8">
+      {/* Title Section Centered Above */}
+      <div className="flex justify-center mb-8">
+        <h1 className="text-4xl font-semibold p-10 text-gray-100">Blogs</h1>
+      </div>
+  
+      {/* Blog Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {blogSetup && blogSetup.length > 0 ? (
+          blogSetup.map((blog, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
+            >
+              <div className="bg-gray-100 p-4">
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">{blog.title}</h2>
+                <p className="text-gray-500 text-sm mb-4">{`Author: ${blog.author}`}</p>
+              </div>
+              <div className="p-4">
+                {blog.image && (
+                  <img
+                    className="object-cover w-full h-64 rounded-lg mx-auto my-4"
+                    src={blog.image}
+                    alt={blog.title}
+                    loading="lazy"
+                  />
+                )}
+              </div>
+              <div className="bg-gray-100 p-4 border-t border-gray-200 text-right">
+                <button className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition-colors w-32">
+                  Read More
+                </button>
+              </div>
             </div>
-            <div className="p-4">
-              {blog.image && (
-                <img
-                  className="object-cover w-full h-64 rounded-lg mx-auto my-4"
-                  src={blog.image}
-                  alt={blog.title}
-                  loading="lazy"  // Added lazy loading for images
-                />
-              )}
-            </div>
-            <div className="bg-gray-100 p-4 border-t border-gray-200 text-right">
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition-colors w-32">
-                Read More
-              </button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <div className="text-gray-500 text-center font-bold my-10">
-          No blogs available
-        </div>
-      )}
+          ))
+        ) : (
+          <div className="text-gray-500 text-center font-bold my-10">No blogs available</div>
+        )}
+      </div>
     </div>
   );
+  
 }
 
 export default BlogDashboard;
