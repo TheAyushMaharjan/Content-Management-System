@@ -19,7 +19,7 @@ class BlogCategoryController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return[
-        new Middleware('permission:view blogCategory',only:['index']),
+        new Middleware('permission:view blog category',only:['index']),
         new Middleware('permission:edit blogCategory',only:['edit']),
         new Middleware('permission:store blogCategory',only:['store']),
         new Middleware('permission:destroy blogCategory',only:['destroy']),

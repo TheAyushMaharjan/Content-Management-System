@@ -15,7 +15,7 @@
 
                 <!-- Scrollable Form Container -->
                 <div class="overflow-y-auto max-h-[calc(100vh-200px)]">
-                    <form action="{{ route('admin.blogSetup.update', $blogsData->id) }}" method="POST"
+                    <form action="{{ route('editor.blogSetup.update', $blogsData->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -103,7 +103,7 @@
 
                         <!-- Submit Button -->
                         <div class="mt-6 flex justify-end space-x-3">
-                            <a href="{{ route('admin.blogSetup.blogSetup') }}"
+                            <a href="{{ route('editor.blogSetup.index') }}"
                                 class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-400">Cancel</a>
                             <button type="submit"
                                 class="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700">Update</button>

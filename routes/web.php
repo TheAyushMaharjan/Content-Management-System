@@ -34,10 +34,12 @@ require __DIR__.'/admin/pages/media/media-auth.php';
 require __DIR__.'/admin/pages/setting/setting-auth.php';
 
 require __DIR__.'/admin/admin-auth.php';
-
 require __DIR__.'/editor/editor-auth.php';
 
 require __DIR__.'/editor/pages/blog/blog-auth.php';
+require __DIR__.'/editor/pages/media/media-auth.php';
+require __DIR__.'/editor/pages/setting/setting-auth.php';
+
 
 
 

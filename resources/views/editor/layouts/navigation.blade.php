@@ -17,23 +17,46 @@
                     </x-nav-link>
                 </div>
                 
-                @can('view blog setup')
+                @can('blog setup')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('editor.blogSetup.index')" :active="request()->routeIs('editor.blogSetup.blogSetup')">
+                    <x-nav-link :href="route('editor.blogSetup.index')" :active="request()->routeIs('editor.blogSetup.index')">
                         {{ __('Blog Setup') }}
                     </x-nav-link>
                 </div>
             @endcan
 
 
-            @can('view blog category')
+            @can('blog category')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('editor.blog.index')" :active="request()->routeIs('editor.blog.blogCategory')">
+                    <x-nav-link :href="route('editor.blog.index')" :active="request()->routeIs('editor.blog.index')">
                         {{ __('Blog Category') }}
                     </x-nav-link>
                 </div>
             @endcan
 
+            @can('gallery setup')
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('editor.gallerySetup.index')" :active="request()->routeIs('editor.gallerySetup.index')">
+                    {{ __('Gallery Setup') }}
+                </x-nav-link>
+            </div>
+            @endcan
+
+            @can('gallery category')
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('editor.galleryCategory.index')" :active="request()->routeIs('editor.galleryCategory.index')">
+                    {{ __('Gallery Category') }}
+                </x-nav-link>
+            </div>
+            @endcan
+
+            @can('setting')
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('editor.setting.index')" :active="request()->routeIs('editor.setting.index')">
+                    {{ __('Setting') }}
+                </x-nav-link>
+            </div>
+            @endcan
 
             </div>
 

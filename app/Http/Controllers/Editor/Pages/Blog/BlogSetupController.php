@@ -16,10 +16,10 @@ class BlogSetupController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return[
-        new Middleware('permission:view blogSetup',only:['index']),
-        new Middleware('permission:edit blogSetup',only:['edit']),
-        new Middleware('permission:store blogSetup',only:['store']),
-        new Middleware('permission:destroy blogSetup',only:['destroy']),
+        new Middleware('permission:view blog setup',only:['index']),
+        new Middleware('permission:edit blogsetup',only:['edit']),
+        new Middleware('permission:store blogsetup',only:['store']),
+        new Middleware('permission:destroy blogsetup',only:['destroy']),
         ];
     }
     

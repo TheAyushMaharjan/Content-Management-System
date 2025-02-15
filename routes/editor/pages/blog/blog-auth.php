@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Editor\pages\Blog\BlogSetupController;
 use App\Http\Controllers\Editor\pages\Blog\BlogCategoryController;

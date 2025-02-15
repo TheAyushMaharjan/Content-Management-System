@@ -162,12 +162,12 @@
                                         </td>
                                         <td class="px-5 py-3 flex items-center space-x-3">
                                             @can('edit blog setup')
-                                            <a href="{{ route('admin.blogSetup.edit', $category->id) }}" 
+                                            <a href="{{ route('editor.blogSetup.edit', $category->id) }}" 
                                                 class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
                                             @endcan
 
                                             @can('delete blog setup')
-                                            <form action="{{ route('admin.blogSetup.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                            <form action="{{ route('editor.blogSetup.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors">Delete</button>
