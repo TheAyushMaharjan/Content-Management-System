@@ -5,12 +5,13 @@ namespace App\Models\editor;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 
 class Editor extends Authenticatable
 {
       /** @use HasFactory<\Database\Factories\UserFactory> */
-      use HasFactory, Notifiable;
-      protected $guard ='editor';
+      use HasFactory, Notifiable, HasRoles;
+      protected $guard_name  ='editor';
 
       /**
        * The attributes that are mass assignable.

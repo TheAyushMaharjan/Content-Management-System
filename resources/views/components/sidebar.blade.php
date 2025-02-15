@@ -39,8 +39,10 @@
                         <span x-show="!$store.sidebar.isCollapsed" class="ml-3">User Management</span>
                     </summary>
                     <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2  text-sm space-y-1">
-                        <li><a href="{{route('admin.user.manageUser')}}" class="flex items-center p-2 text-[#E0E1DD] hover:bg-gray-700 rounded">Manage User</a></li>
-                        <li><a href="#" class="flex items-center p-2 text-[#E0E1DD] hover:bg-gray-700 rounded">Manage Permission</a></li>
+                        <li><a href="{{route('admin.user.permissions')}}" class="flex items-center p-2 text-[#E0E1DD] hover:bg-gray-700 rounded">Permissions</a></li>
+                        <li><a href="{{route('admin.user.roles')}}" class="flex items-center p-2 text-[#E0E1DD] hover:bg-gray-700 rounded">Roles</a></li>
+                        <li><a href="{{route('admin.user.users.index')}}" class="flex items-center p-2 text-[#E0E1DD] hover:bg-gray-700 rounded">User</a></li>
+
                     </ul>
                 </details>
             </li>

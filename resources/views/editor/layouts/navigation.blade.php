@@ -16,6 +16,25 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                
+                @can('view blog setup')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('editor.blogSetup.index')" :active="request()->routeIs('editor.blogSetup.blogSetup')">
+                        {{ __('Blog Setup') }}
+                    </x-nav-link>
+                </div>
+            @endcan
+
+
+            @can('view blog category')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('editor.blog.index')" :active="request()->routeIs('editor.blog.blogCategory')">
+                        {{ __('Blog Category') }}
+                    </x-nav-link>
+                </div>
+            @endcan
+
+
             </div>
 
             <!-- Settings Dropdown -->

@@ -37,4 +37,7 @@ require __DIR__.'/admin/admin-auth.php';
 
 require __DIR__.'/editor/editor-auth.php';
 
+require __DIR__.'/editor/pages/blog/blog-auth.php';
+
+
 

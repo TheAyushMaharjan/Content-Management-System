@@ -2,158 +2,114 @@
 
 namespace App\Http\Controllers\admin\pages\User;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Models\editor\Editor;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Pagination\LengthAwarePaginator;
 
-class UserController extends Controller
+class UserController extends Controller 
 {
+   
+    public function index()
+    {
+        $users = Editor::latest()->paginate(10);
+        return view('admin.pages.user.users.list',[
+            'users' => $users
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $roles = Role::orderBy('name','ASC')->get();
+        return view('admin.pages.user.users.create',[
+            'roles'=> $roles
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        try {
-            $validatedData = $request->validate([
-                'username' => 'nullable|string|max:255',
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email|unique:editors,email', // Ensure email is unique in both tables
-                'password' => 'required|string|min:8|confirmed',
-                'contact' => 'nullable|string|max:15',
-                'address' => 'nullable|string|max:255',
-                'role' => 'nullable|in:user,editor',  // Ensure role is either 'user' or 'editor'
-            ]);
+        // Validate input
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email', // Corrected unique check to check for 'email'
+            'password' => 'required|min:6|same:password_confirmation', // Ensures password confirmation
+            'password_confirmation' => 'required' // Ensures password confirmation
 
-            // Check the selected role (user or editor)
-            if ($validatedData['role'] == 'editor') {
-                // Store data in the Editor table
-                Editor::create([
-                    'username' => $validatedData['username'],
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
-                    'password' => bcrypt($validatedData['password']),
-                    'contact' => $validatedData['contact'],
-                    'address' => $validatedData['address'],
-                ]);
-            } else {
-                // Store data in the User table
-                User::create([
-                    'username' => $validatedData['username'],
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
-                    'password' => bcrypt($validatedData['password']),
-                    'contact' => $validatedData['contact'],
-                    'address' => $validatedData['address'],
-                ]);
-            }
-
-            return redirect()->route('admin.user.manageUser')->with('success', 'User created successfully!');
-        } catch (\Exception $e) {
-            Log::error('Error creating user: ', [
-                'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
-            return redirect()->route('admin.pages.user.manageUser')->with('error', 'An error occurred while creating the user. Please try again.');
+        ]);
+    
+        // If validation fails, redirect back with errors
+        if ($validator->fails()) {
+            return redirect()->route('admin.user.users.create')->withInput()->withErrors($validator);
         }
+    
+        // Create a new user
+        $user = new Editor();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password); // Store the encrypted password
+        $user->save();
+    
+        $user->syncRoles($request->role);
+        // Redirect back with success message
+        return redirect()->route('admin.user.users.index')->with('success', 'User created successfully!');
     }
+    
 
-    public function edit($id)
+ 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $user = User::find($id);
-        $editor = Editor::find($id);
-        $isEditor = false;
+        $users = Editor::findOrFail($id);
+        $roles = Role::orderBy('name','ASC')->get();
 
-        if ($user) {
-            return view('admin.pages.user.edit', compact('user', 'isEditor', 'editor'));
-        } elseif ($editor) {
-            $isEditor = true; // Set to true if it's an editor
-            return view('admin.pages.user.edit', compact('editor', 'isEditor', 'user'));
-        } else {
-            return redirect()->route('admin.pages.user.manageUser')->with('error', 'User or Editor not found.');
-        }
+        $hasRoles = $users->roles->pluck('id');
+        return view('admin.pages.user.users.edit',[
+            'users'=>$users,
+            'roles'=>$roles,
+            'hasRoles'=>$hasRoles
+        ]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, string $id)
     {
-
-        $validateUser = Validator::make($request->all(), [
-            'username' => 'nullable|string|max:255',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id, // Allow same email for the same user
-            'password' => 'required|string|min:8|confirmed',
-            'contact' => 'nullable|string|max:15',
-            'address' => 'nullable|string|max:255',
+        $user = Editor::findOrFail($id);
+        $validator  =Validator::make($request->all(),[
+            'name'=>'required|min:3',
+            'email'=>'required|email|unique:users,email,'.$id.',id'
         ]);
-
-        if ($validateUser->fails()) {
-            return redirect()->route('admin.user.manageUser')
-                ->withErrors($validateUser)
-                ->withInput(); // Keeps old input
+        if($validator->fails()){
+            return redirect()->route('admin.user.users.edit',$id)->withInput()->withErrors($validator);
         }
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
 
-        $user = User::findOrFail($id);
-        $editor = Editor::findOrFail($id);
+        $user->syncRoles($request->role);
+        return redirect()->route('admin.user.users.index',$id)->with('success','User Updated Successfully.');
 
-        if ($user) {
-            // If it's a User, update the User
-            $user->update([
-                'username' => $request['username'],
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => $request->password ? bcrypt($request->password) : $user->password, // Hash password only if provided
-                'contact' => $request['contact'],
-                'address' => $request['address'],
-            ]);
-            return redirect()->route('admin.user.manageUser')->with('success', 'User data edited successfully.');
-        } elseif ($editor) {
-            // If it's an Editor, update the Editor
-            $editor->update([
-                'username' => $request['username'],
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => $request->password ? bcrypt($request->password) : $editor->password, // Hash password only if provided
-                'contact' => $request['contact'],
-                'address' => $request['address'],
-            ]);
-            return redirect()->route('admin.user.manageUser')->with('success', 'Editor data edited successfully.');
-        }
-
-        return redirect()->route('admin.user.manageUser')->with('error', 'User/Editor not found.');
     }
+    
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(string $id)
     {
-        User::where('id', $id)->delete();
-        return redirect()->route('admin.user.manageUser')->with('success', 'Data deleted successfully.');
-    }
+       Editor::where('id',$id)->delete();
+       return redirect()->route('admin.user.users.index')->with('success','User deleted successfully');
 
-    public function manageUser()
-    {
-        // Paginate users and editors separately
-        $users = User::paginate(10);
-        $editors = Editor::paginate(10);
-
-        // Add a 'type' attribute to distinguish between User and Editor
-        $users->getCollection()->transform(function ($user) {
-            $user->type = 'User'; // Add the 'type' property
-            return $user;
-        });
-
-        $editors->getCollection()->transform(function ($editor) {
-            $editor->type = 'Editor'; // Add the 'type' property
-            return $editor;
-        });
-
-        // Combine the two collections
-        $combined = $users->merge($editors);
-
-        // Paginate the combined collection
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 10;
-        $currentResults = $combined->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        $paginated = new LengthAwarePaginator($currentResults, $combined->count(), $perPage, $currentPage);
-
-        return view('admin.pages.user.manageUser', compact('paginated'));
     }
 }
+

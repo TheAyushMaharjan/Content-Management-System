@@ -5,12 +5,13 @@ namespace App\Models\admin;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
       /** @use HasFactory<\Database\Factories\UserFactory> */
-      use HasFactory, Notifiable;
-      protected $guard ='admin';
+      use HasFactory, Notifiable, HasRoles;
+      protected $guard_name ='admin';
 
       /**
        * The attributes that are mass assignable.
