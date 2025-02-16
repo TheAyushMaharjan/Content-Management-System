@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\admin\pages\Blog\BlogCategoryController;
-use App\Http\Controllers\admin\pages\Blog\BlogSetupController;
 use App\Http\Controllers\admin\pages\Gallery\GalleryCategoryController;
 use App\Http\Controllers\admin\pages\Gallery\GallerySetupController;
 use Illuminate\Support\Facades\Route;

@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-[#E0E1DD] dark:text-[#E0E1DD] leading-tight">
             {{ __('Setting') }}
         </h2>
+       
     </x-slot>
     <div x-data :class="$store.sidebar.isCollapsed ? 'ml-20' : 'ml-10'" class="py-6 transition-all duration-300">
 
@@ -149,9 +150,13 @@
                                         <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $user->contact }}</td>
                                         
                                         <td class="px-5 py-3 flex items-center space-x-3">
-                                            {{-- <a href="{{ route('admin.user.edit', $user->id) }}"
-                                                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a> --}}
-                                            <form action="{{ route('admin.setting.destroy', $user->id) }}" method="POST"
+                                            @can('edit header setting')
+                                            <a href="{{ route('editor.setting.edit', $user->id) }}"
+                                                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
+                                            @endcan
+
+                                            @can('delete header setting')
+                                                 <form action="{{ route('editor.setting.destroy', $user->id) }}" method="POST"
                                                 class="inline"
                                                 onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                 @csrf
@@ -159,6 +164,8 @@
                                                 <button type="submit"
                                                     class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors ml-2">Delete</button>
                                             </form>
+                                            @endcan
+
                                         </td>
                                     </tr>
                                     @endforeach

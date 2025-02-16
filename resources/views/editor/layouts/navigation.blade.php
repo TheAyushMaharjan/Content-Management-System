@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 
-                @can('navigation blog setup')
+                @can('blogsetup navlink')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('editor.blogSetup.index')" :active="request()->routeIs('editor.blogSetup.index')">
                         {{ __('Blog Setup') }}
@@ -26,7 +26,7 @@
             @endcan
 
 
-            @can('navigation blog category')
+            @can('blogcategory navlink')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('editor.blog.index')" :active="request()->routeIs('editor.blog.index')">
                         {{ __('Blog Category') }}
@@ -34,7 +34,7 @@
                 </div>
             @endcan
 
-            @can('navigation gallery setup')
+            @can('gallerysetup navlink')
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <x-nav-link :href="route('editor.gallerySetup.index')" :active="request()->routeIs('editor.gallerySetup.index')">
                     {{ __('Gallery Setup') }}
@@ -42,7 +42,7 @@
             </div>
             @endcan
 
-            @can('navigation gallery category')
+            @can('gallerycategory navlink')
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <x-nav-link :href="route('editor.galleryCategory.index')" :active="request()->routeIs('editor.galleryCategory.index')">
                     {{ __('Gallery Category') }}
@@ -50,7 +50,7 @@
             </div>
             @endcan
 
-            @can('navigation setting')
+            @can('header navlink')
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                 <x-nav-link :href="route('editor.setting.index')" :active="request()->routeIs('editor.setting.index')">
                     {{ __('Setting') }}

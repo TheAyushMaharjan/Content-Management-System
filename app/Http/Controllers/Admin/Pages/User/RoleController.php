@@ -68,24 +68,29 @@ class RoleController extends Controller
             'blog category',
             'gallery setup',
             'gallery category',
-            'setting',
-            'general', // Fallback category for uncategorized permissions
+            'header setting',
+            'navlink',
         ];
     
-        // Categorize permissions, ensuring all are included
+        // Initialize categorized permissions
         $categorizedPermissions = [];
+    
+        // Keep track of assigned permissions to avoid duplication
+        $assignedPermissions = collect();
+    
+        // Categorize permissions, ensuring each permission appears only once
         foreach ($categories as $category) {
-            $categorizedPermissions[$category] = $permissions->filter(
-                fn($permission) => str_contains(strtolower($permission->name), strtolower($category))
-            );
+            $categorizedPermissions[$category] = $permissions->filter(function ($permission) use ($category, $assignedPermissions) {
+                if (str_contains(strtolower($permission->name), strtolower($category)) && !$assignedPermissions->contains($permission->name)) {
+                    $assignedPermissions->push($permission->name); // Mark as assigned
+                    return true;
+                }
+                return false;
+            });
         }
     
         // Add a 'general' category for permissions that don't fit anywhere
-        $categorizedPermissions['general'] = $permissions->reject(
-            fn($permission) => collect($categories)->contains(
-                fn($category) => str_contains(strtolower($permission->name), strtolower($category))
-            )
-        );
+        $categorizedPermissions['general'] = $permissions->reject(fn($permission) => $assignedPermissions->contains($permission->name));
     
         return view('admin.pages.roles.edit', [
             'permissions' => $permissions,
@@ -94,6 +99,7 @@ class RoleController extends Controller
             'role' => $role
         ]);
     }
+    
     
 
     public function update(Request $request, $id)

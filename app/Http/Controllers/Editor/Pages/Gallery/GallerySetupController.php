@@ -100,7 +100,7 @@ class GallerySetupController extends Controller implements HasMiddleware
         $category->content = $request->content;
         $category->is_published = $request->is_published ? 1 : 0;
 
-        // Handle image upload if provided
+        // Handle image upload if   
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('image', 'public');
             $category->image = $imagePath;

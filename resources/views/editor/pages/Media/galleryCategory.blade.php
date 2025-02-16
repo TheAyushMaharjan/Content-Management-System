@@ -122,9 +122,12 @@
                                             </span>
                                         </td>
                                         <td class="px-5 py-3 flex items-center space-x-3">
-                                            
-                                            <a href="{{ route('editor.galleryCategory.edit', $category->id) }}"
+                                          @can('edit gallery category')
+                                                <a href="{{ route('editor.galleryCategory.edit', $category->id) }}"
                                                 class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
+                                        @endcan
+
+                                        @can('delete gallery category')
                                             <form action="{{ route('editor.galleryCategory.destroy', $category->id) }}"
                                                 method="POST" class="inline"
                                                 onsubmit="return confirm('Are you sure you want to delete this category?');">
@@ -133,6 +136,8 @@
                                                 <button type="submit"
                                                     class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors">Delete</button>
                                             </form>
+                                        @endcan
+
                                         </td>
                                     </tr>
                                     @endforeach

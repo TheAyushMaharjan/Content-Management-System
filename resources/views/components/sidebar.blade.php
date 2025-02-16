@@ -91,7 +91,7 @@
                         <span x-show="!$store.sidebar.isCollapsed" class="ml-3">Settings</span>
                     </summary>
                     <ul x-show="!$store.sidebar.isCollapsed" class="pl-4 mt-2 text-sm space-y-1">
-                        <li><a href="{{route('admin.setting.header')}}" class="flex items-center p-2 text-[#E0E1DD] hover:bg-gray-700 rounded">Website Heading & Logo Setting</a></li>
+                        <li><a href="{{route('admin.setting.index')}}" class="flex items-center p-2 text-[#E0E1DD] hover:bg-gray-700 rounded">Website Heading & Logo Setting</a></li>
                         <li><a href="#" class="flex items-center p-2 text-[#E0E1DD] hover:bg-gray-700 rounded">Footer Setting</a></li>
                     </ul>
                 </div>

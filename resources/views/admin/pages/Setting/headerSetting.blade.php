@@ -147,8 +147,8 @@
                                         <td class="px-5 py-3 text-gray-800 dark:text-gray-100">{{ $user->contact }}</td>
                                         
                                         <td class="px-5 py-3 flex items-center space-x-3">
-                                            {{-- <a href="{{ route('admin.user.edit', $user->id) }}"
-                                                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a> --}}
+                                            <a href="{{ route('admin.setting.edit', $user->id) }}"
+                                                class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
                                             <form action="{{ route('admin.setting.destroy', $user->id) }}" method="POST"
                                                 class="inline"
                                                 onsubmit="return confirm('Are you sure you want to delete this category?');">

@@ -46,12 +46,13 @@
                                 <a class="bg-green-400 hover:bg-green-500 text-gray-700 rounded-md px-4 py-1 inline-block" href="{{route("admin.user.permissions.edit",$permission->id)}}">Edit</a>
                             
                                 <!-- Delete Button inside Form -->
-                                <form action="{{route("admin.user.permissions.delete",$permission->id)}}" method="POST" style="display:inline;">
+                              <form action="{{ route('admin.user.permissions.delete', $permission->id) }}" method="POST" 
+                                    class="inline"
+                                    onsubmit="return confirm('Are you sure you want to delete this category?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-400 hover:bg-red-500 text-gray-700 rounded-md px-4 py-1 inline-block">
-                                        Delete
-                                    </button>
+                                    <button type="submit"
+                                        class="bg-red-400 hover:bg-red-500 text-gray-700 rounded-md px-4 py-1 inline-block">Delete</button>
                                 </form>
 
                             </td>

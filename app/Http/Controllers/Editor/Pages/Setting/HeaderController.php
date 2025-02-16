@@ -17,12 +17,13 @@ class HeaderController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return[
-        new Middleware('permission:view header',only:['index']),
-        new Middleware('permission:edit header',only:['edit']),
-        new Middleware('permission:store header',only:['store']),
-        new Middleware('permission:destroy header',only:['destroy']),
+        new Middleware('permission:view header setting',only:['index']),
+        new Middleware('permission:edit header setting',only:['edit']),
+        new Middleware('permission:store header setting',only:['store']),
+        new Middleware('permission:destroy header setting',only:['destroy']),
         ];
     }  
+
     public function store(Request $request)
     {
         try {
@@ -58,7 +59,7 @@ class HeaderController extends Controller implements HasMiddleware
             return redirect()->route('editor.setting.header')->with('error', 'An error occurred while saving data. Please try again.');
         }
     }
-    
+
     public function destroy(string $id)
     {
         // Find the record
@@ -79,7 +80,7 @@ class HeaderController extends Controller implements HasMiddleware
     public function edit(string $id)
     {
         $articles = Setting::findOrFail($id);
-        return view('articles.edit',compact('articles'));
+        return view('editor.pages.setting.edit',compact('articles'));
 
     }
 
@@ -88,36 +89,42 @@ class HeaderController extends Controller implements HasMiddleware
      */
     public function update(Request $request, $id)
     {
-        // Validate incoming request
-        $request->validate([
-            'title' => 'nullable|string|min:3',
-            'content' => 'nullable|string|min:3',
-            'email' => 'nullable|string|email',
-            'contact' => 'nullable|string|min:3',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-        // Find the category by its ID
-        $category = Setting::findOrFail($id);
-
-        // Update category data
-        $category->category_id = $request->category_id;
-        $category->title = $request->title;
-        $category->slug = $request->slug;
-        $category->content = $request->content;
-        $category->is_published = $request->is_published ? 1 : 0;
-
-        // Handle image upload if provided
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('image', 'public');
-            $category->image = $imagePath;
+        try {
+            // Validate incoming request
+            $validatedData = $request->validate([
+                'title' => 'nullable|string|min:3',
+                'content' => 'nullable|string|min:3',
+                'email' => 'nullable|string|email',
+                'contact' => 'nullable|string|min:3',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+    
+            // Find the record
+            $category = Setting::findOrFail($id);
+    
+            // Update fields
+            $category->title = $validatedData['title'];
+            $category->content = $validatedData['content'];
+            $category->email = $validatedData['email'];
+            $category->contact = $validatedData['contact'];
+    
+            // Handle image upload if provided
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('images', 'public');
+                $category->image = $imagePath;
+            }
+    
+            // Save the updated category
+            $category->save();
+    
+            return redirect()->route('editor.setting.index')
+                ->with('success', 'Data updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('editor.setting.index')
+                ->with('error', 'Something went wrong: ' . $e->getMessage());
         }
-
-        // Save the updated category
-        $category->save();
-        return redirect()->route('editor.gallerySetup.edit', ['id' => $category->id])
-        ->with('success', 'Data updated successfully.');
     }
+    
   
     // Display the user management page
     public function index()

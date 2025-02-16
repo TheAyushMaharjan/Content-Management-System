@@ -8,8 +8,8 @@ Route::middleware('auth:editor')->prefix('editor')->name('editor.')->group(funct
         Route::get('/index', [HeaderController::class, 'index'])->name('index'); // Manage Users
         Route::post('/store', [HeaderController::class, 'store'])->name('store');
         Route::delete('/destroy/{id}', [HeaderController::class, 'destroy'])->name('destroy');
-        // Route::put('/update/{id}', [HeaderController::class, 'update'])->name('update');
-        // Route::get('/edit/{id}', [HeaderController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [HeaderController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [HeaderController::class, 'edit'])->name('edit');
     });
  
 });

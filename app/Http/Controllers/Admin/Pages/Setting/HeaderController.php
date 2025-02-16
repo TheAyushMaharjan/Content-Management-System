@@ -16,10 +16,10 @@ class HeaderController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return[
-        new Middleware('permission:view blog category',only:['index']),
-        // new Middleware('permission:edit blogCategory',only:['edit']),
-        new Middleware('permission:store blogCategory',only:['store']),
-        new Middleware('permission:destroy blogCategory',only:['destroy']),
+        new Middleware('permission:view settingheader',only:['index']),
+        new Middleware('permission:edit settingheader',only:['edit']),
+        new Middleware('permission:store settingheader',only:['store']),
+        new Middleware('permission:destroy settingheader',only:['destroy']),
         ];
     }
     public function store(Request $request)
@@ -76,30 +76,49 @@ class HeaderController extends Controller implements HasMiddleware
     
 
 
-    // public function edit($id){
-    //     $blog = GalleryCategory::findOrFail($id);
+    public function edit($id){
+        $articles = Setting::findOrFail($id);
 
-    //     return view('admin.pages.media.galleryCategoryEdit',compact('blog'));
-    // }
+        return view('admin..pages.setting.edit',compact('articles'));
+    }
 
-    // public function update(request $request, $id){
-    //     $validateData = $request->validate([
-    //         'gallery_category'=>'required|string|min:3',
-    //             'content'=>'required|string|min:3',
-    //             'is_published' => 'nullable|boolean',
-
-    //     ]);
-    //     $blog = GalleryCategory::findOrFail($id);
-    //     $blog->is_published = $request->is_published ? 1 : 0; // Corrected column name
-    //     $blog->gallery_category  = $request->gallery_category ; // Corrected column name
-    //     $blog->content  = $request->content ; // Corrected column name
-
-        
-    //     $blog->save();
-
-    //     return redirect()->route('admin.galleryCategory.galleryCategory')->with('success', 'Data Updated successfully.');
-
-    // }
+    public function update(Request $request, $id)
+    {
+        try {
+            // Validate incoming request
+            $validatedData = $request->validate([
+                'title' => 'nullable|string|min:3',
+                'content' => 'nullable|string|min:3',
+                'email' => 'nullable|string|email',
+                'contact' => 'nullable|string|min:3',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+    
+            // Find the record
+            $category = Setting::findOrFail($id);
+    
+            // Update fields
+            $category->title = $validatedData['title'];
+            $category->content = $validatedData['content'];
+            $category->email = $validatedData['email'];
+            $category->contact = $validatedData['contact'];
+    
+            // Handle image upload if provided
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('images', 'public');
+                $category->image = $imagePath;
+            }
+    
+            // Save the updated category
+            $category->save();
+    
+            return redirect()->route('admin.setting.index')
+                ->with('success', 'Data updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.setting.index')
+                ->with('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
 
 
     // Display the user management page

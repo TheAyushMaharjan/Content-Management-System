@@ -1,4 +1,4 @@
-<x-admin-app-layout>
+{{-- <x-admin-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-[#E0E1DD] dark:text-[#E0E1DD] leading-tight">
             {{ __('User Management') }}
@@ -147,6 +147,7 @@
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors ml-2">Delete</button>
                                         </form>
+                                        
                                     </td>
                                 </tr>
                             @endforeach
@@ -168,4 +169,4 @@
         </div>
         </div>
     </div>
-</x-admin-app-layout>
+</x-admin-app-layout> --}}
