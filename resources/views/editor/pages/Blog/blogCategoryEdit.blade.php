@@ -15,7 +15,7 @@
                 <!-- Scrollable Form Container -->
                 <div class="overflow-y-auto max-h-[calc(100vh-200px)] p-4 bg-white rounded-lg shadow-md">
                     <!-- Edit Form -->
-                    <form action="{{ route('admin.blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('editor.blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         @if ($errors->any())

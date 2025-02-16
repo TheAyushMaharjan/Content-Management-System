@@ -30,7 +30,7 @@
                 <!-- Flexbox Layout for Form and Table -->
                 <div class="flex gap-6 pt-6">
                     <!-- Category Management Form Table (left side) -->
-
+                    @can('store gallery setup')
                     <div class="w-full lg:w-2/5 bg-white dark:bg-[#1B263B] p-4 rounded-lg shadow-sm">
                         <form action="{{ route('admin.gallerySetup.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -116,6 +116,7 @@
                     </form>
 
                 </div>
+                @endcan
 
                 <!-- Category List Table (right side) -->
                 <div class="w-full lg:w-3/5 bg-white dark:bg-[#1B263B] p-6 rounded-2xl shadow-lg">
@@ -154,10 +155,10 @@
                                             </span>
                                         </td>
                                         <td class="px-5 py-3 flex justify-center items-center space-x-3">
-                                            <a href="{{ route('admin.gallerySetup.edit', $category->id) }}"
+                                            <a href="{{ route('editor.gallerySetup.edit', $category->id) }}"
                                                 class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
                                             
-                                            <form action="{{ route('admin.gallerySetup.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                            <form action="{{ route('editor.gallerySetup.destroy', $category->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors">Delete</button>

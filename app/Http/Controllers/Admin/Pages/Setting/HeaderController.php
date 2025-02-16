@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers\admin\pages\Setting;
 
-use App\Models\admin\pages\setting\Setting;
 use App\Models\cr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\admin\pages\setting\Setting;
+use Illuminate\Routing\Controllers\Middleware;
 use App\Models\admin\pages\media\GalleryCategory;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class HeaderController extends Controller
+class HeaderController extends Controller implements HasMiddleware
 {
-  
+    public static function middleware(): array
+    {
+        return[
+        new Middleware('permission:view blog category',only:['index']),
+        // new Middleware('permission:edit blogCategory',only:['edit']),
+        new Middleware('permission:store blogCategory',only:['store']),
+        new Middleware('permission:destroy blogCategory',only:['destroy']),
+        ];
+    }
     public function store(Request $request)
     {
         try {
@@ -93,7 +103,7 @@ class HeaderController extends Controller
 
 
     // Display the user management page
-    public function header()
+    public function index()
     {
         // Use paginate() to get paginated results (10 items per page)
         $heading = Setting::paginate(10); // This will paginate the results

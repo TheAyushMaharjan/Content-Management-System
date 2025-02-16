@@ -29,6 +29,7 @@
                 </h2>
                 <!-- Flexbox Layout for Form and Table -->
                 <div class="flex gap-6 pt-6">
+                    @can('store gallery category')
                     <!-- Category Management Form Table (left side) -->
                     <div class="w-full lg:w-2/5 bg-white dark:bg-[#1B263B] p-4 rounded-lg shadow-sm">
                         <form action="{{ route('editor.galleryCategory.store') }}" method="POST">
@@ -79,6 +80,7 @@
                             </div>
                         </form>
                     </div>
+                @endcan
 
                     <!-- Category List Table (right side) -->
                     <div class="w-full lg:w-3/5 bg-white dark:bg-[#1B263B] p-6 rounded-2xl shadow-lg">
@@ -121,9 +123,9 @@
                                         </td>
                                         <td class="px-5 py-3 flex items-center space-x-3">
                                             
-                                            <a href="{{ route('admin.galleryCategory.edit', $category->id) }}"
+                                            <a href="{{ route('editor.galleryCategory.edit', $category->id) }}"
                                                 class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
-                                            <form action="{{ route('admin.galleryCategory.destroy', $category->id) }}"
+                                            <form action="{{ route('editor.galleryCategory.destroy', $category->id) }}"
                                                 method="POST" class="inline"
                                                 onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                 @csrf

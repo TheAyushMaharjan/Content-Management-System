@@ -20,7 +20,7 @@ class BlogCategoryController extends Controller implements HasMiddleware
     {
         return[
         new Middleware('permission:view blog category',only:['index']),
-        new Middleware('permission:edit blogCategory',only:['edit']),
+        new Middleware('permission:edit blog category',only:['edit']),
         new Middleware('permission:store blogCategory',only:['store']),
         new Middleware('permission:destroy blogCategory',only:['destroy']),
         ];
@@ -43,20 +43,20 @@ class BlogCategoryController extends Controller implements HasMiddleware
                 'description'=>$validateData['description'] ?? null,
                 'is_published' => $request->input('is_published',0),
             ]);
-            return redirect()->route('editor.blog.blogCategory')->with('success','Blog added Successfully!');
+            return redirect()->route('editor.blog.index')->with('success','Blog added Successfully!');
         }
         catch(\Exception $e){
             Log::error('Error creating user: ', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            return redirect()->route('editor.blog.blogCategory')->with('error', 'An error occurred while creating the blog. Please try again.');
+            return redirect()->route('editor.blog.index')->with('error', 'An error occurred while creating the blog. Please try again.');
        
         }
     }
     public function destroy(string $id){
         $data = BlogCategory::where('id',$id)->delete();
-        return redirect()->route('editor.blog.blogCategory')->with('success', 'Data deleted successfully.');
+        return redirect()->route('editor.blog.index')->with('success', 'Data deleted successfully.');
     }
 
 
@@ -87,7 +87,7 @@ class BlogCategoryController extends Controller implements HasMiddleware
         \Log::info("Blog updated successfully: ", $blog->toArray());
 
 
-        return redirect()->route('editor.blog.blogCategory')->with('success', 'Data Updated successfully.');
+        return redirect()->route('editor.blog.index')->with('success', 'Data Updated successfully.');
 
     }
 

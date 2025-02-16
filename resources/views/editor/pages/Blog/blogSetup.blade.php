@@ -31,7 +31,7 @@
                     <!-- Flexbox Layout for Form and Table -->
                 <div class="flex gap-6 pt-6">
                         <!-- Category Management Form Table (left side) -->
-
+                            @can('store blog setup')
                         <div class="w-full lg:w-2/5 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
                             <form action="{{ route('admin.blogSetup.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -121,6 +121,8 @@
                             </form>
     
                         </div>
+                        @endcan
+
     
                     <!-- Category List Table (right side) -->
                     <div class="w-full lg:w-3/5 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">

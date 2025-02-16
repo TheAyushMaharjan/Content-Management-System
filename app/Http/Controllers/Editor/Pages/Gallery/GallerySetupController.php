@@ -16,9 +16,9 @@ class GallerySetupController extends Controller implements HasMiddleware
     {
         return[
         new Middleware('permission:view gallery setup',only:['index']),
-        new Middleware('permission:edit gallerySetup',only:['edit']),
-        new Middleware('permission:store gallerySetup',only:['store']),
-        new Middleware('permission:destroy gallerySetup',only:['destroy']),
+        new Middleware('permission:edit gallery setup',only:['edit']),
+        new Middleware('permission:store gallery setup',only:['store']),
+        new Middleware('permission:destroy gallery setup',only:['destroy']),
         ];
     }
     public function store(Request $request)

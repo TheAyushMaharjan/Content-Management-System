@@ -15,9 +15,9 @@ class GalleryCategoryController extends Controller implements HasMiddleware
     {
         return[
         new Middleware('permission:view gallery category',only:['index']),
-        new Middleware('permission:edit galleryCategory',only:['edit']),
-        new Middleware('permission:store galleryCategory',only:['store']),
-        new Middleware('permission:destroy galleryCategory',only:['destroy']),
+        new Middleware('permission:edit gallery category',only:['edit']),
+        new Middleware('permission:store gallery category',only:['store']),
+        new Middleware('permission:destroy gallery category',only:['destroy']),
         ];
     }
     public function store(request $request){

@@ -17,9 +17,9 @@ class BlogSetupController extends Controller implements HasMiddleware
     {
         return[
         new Middleware('permission:view blog setup',only:['index']),
-        new Middleware('permission:edit blogsetup',only:['edit']),
-        new Middleware('permission:store blogsetup',only:['store']),
-        new Middleware('permission:destroy blogsetup',only:['destroy']),
+        new Middleware('permission:edit blog setup',only:['edit']),
+        new Middleware('permission:store blog setup',only:['store']),
+        new Middleware('permission:destroy blog setup',only:['destroy']),
         ];
     }
     
@@ -56,21 +56,21 @@ class BlogSetupController extends Controller implements HasMiddleware
         // Save the blog category data
     
         // Redirect back with success message
-        return redirect()->route('editor.blogSetup.blogSetup')->with('success', 'Blog Category created successfully!');
+        return redirect()->route('editor.blogSetup.index')->with('success', 'Blog Category created successfully!');
     }
     catch(\Exception $e){
         Log::error('Error creating user: ', [
             'message' => $e->getMessage(),
             'trace' => $e->getTraceAsString(),
         ]);
-        return redirect()->route('editor.blogSetup.blogSetup')->with('error', 'An error occurred while creating the blog. Please try again.');
+        return redirect()->route('editor.blogSetup.index')->with('error', 'An error occurred while creating the blog. Please try again.');
    
     }
 }
     
     public function destroy(string $id){
         $data = BlogSetup::where('id',$id)->delete();
-        return redirect()->route('editor.blogSetup.blogSetup')->with('success', 'Data deleted successfully.');
+        return redirect()->route('editor.blogSetup.index')->with('success', 'Data deleted successfully.');
     }
 
     public function edit($id){
@@ -114,7 +114,7 @@ class BlogSetupController extends Controller implements HasMiddleware
             'image'         => $validateData['image'] ?? $blog->image, // Keep old image if not updated
         ]);
     
-        return redirect()->route('editor.blogSetup.edit', ['id' => $blog->id])
+        return redirect()->route('editor.blogSetup.index', ['id' => $blog->id])
         ->with('success', 'Data updated successfully.');
 }
     public function index(){
@@ -126,6 +126,7 @@ class BlogSetupController extends Controller implements HasMiddleware
         ]);
         }
 
+        //for frontend display
         public function frontDisplay(Request $request)
 {
     $blogs = BlogSetup::where('is_published',1)->paginate(10); 

@@ -66,7 +66,8 @@ class RoleController extends Controller
         $categories = [
             'blog setup',
             'blog category',
-            'gallery',
+            'gallery setup',
+            'gallery category',
             'setting',
             'general', // Fallback category for uncategorized permissions
         ];

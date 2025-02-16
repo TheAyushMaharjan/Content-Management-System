@@ -6,6 +6,7 @@ use App\Models\cr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Models\admin\pages\setting\Setting;
 use Illuminate\Routing\Controllers\Middleware;
 use App\Models\admin\pages\media\GalleryCategory;
@@ -75,33 +76,49 @@ class HeaderController extends Controller implements HasMiddleware
     }
     
 
+    public function edit(string $id)
+    {
+        $articles = Setting::findOrFail($id);
+        return view('articles.edit',compact('articles'));
 
-    // public function edit($id){
-    //     $blog = GalleryCategory::findOrFail($id);
+    }
 
-    //     return view('admin.pages.media.galleryCategoryEdit',compact('blog'));
-    // }
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        // Validate incoming request
+        $request->validate([
+            'title' => 'nullable|string|min:3',
+            'content' => 'nullable|string|min:3',
+            'email' => 'nullable|string|email',
+            'contact' => 'nullable|string|min:3',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    // public function update(request $request, $id){
-    //     $validateData = $request->validate([
-    //         'gallery_category'=>'required|string|min:3',
-    //             'content'=>'required|string|min:3',
-    //             'is_published' => 'nullable|boolean',
+        // Find the category by its ID
+        $category = Setting::findOrFail($id);
 
-    //     ]);
-    //     $blog = GalleryCategory::findOrFail($id);
-    //     $blog->is_published = $request->is_published ? 1 : 0; // Corrected column name
-    //     $blog->gallery_category  = $request->gallery_category ; // Corrected column name
-    //     $blog->content  = $request->content ; // Corrected column name
+        // Update category data
+        $category->category_id = $request->category_id;
+        $category->title = $request->title;
+        $category->slug = $request->slug;
+        $category->content = $request->content;
+        $category->is_published = $request->is_published ? 1 : 0;
 
-        
-    //     $blog->save();
+        // Handle image upload if provided
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('image', 'public');
+            $category->image = $imagePath;
+        }
 
-    //     return redirect()->route('admin.galleryCategory.galleryCategory')->with('success', 'Data Updated successfully.');
-
-    // }
-
-
+        // Save the updated category
+        $category->save();
+        return redirect()->route('editor.gallerySetup.edit', ['id' => $category->id])
+        ->with('success', 'Data updated successfully.');
+    }
+  
     // Display the user management page
     public function index()
     {

@@ -29,9 +29,10 @@
                 </h2>
                 <!-- Flexbox Layout for Form and Table -->
                 <div class="flex gap-6 pt-6">
+                    @can('store blog category')
                     <!-- Category Management Form Table (left side) -->
                     <div class="w-full lg:w-2/5 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-                        <form action="{{ route('admin.blog.store') }}" method="POST">
+                        <form action="{{ route('editor.blog.store') }}" method="POST">
                             @csrf
                             <div class="space-y-2">
                                 <h2 class="text-gray-700 text-center dark:text-gray-100 text-2xl font-bold py-2">
@@ -89,6 +90,7 @@
                             </div>
                         </form>
                     </div>
+                    @endcan
 
                     <!-- Category List Table (right side) -->
                     <div class="w-full lg:w-3/5 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
@@ -134,12 +136,12 @@
                                         </td>
                                         <td class="px-5 py-3 flex items-center space-x-3">
                                             @can('edit blog category')
-                                            <a href="{{ route('admin.blog.edit', $category->id) }}"
+                                            <a href="{{ route('editor.blog.edit', $category->id) }}"
                                                 class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors">Edit</a>
                                             @endcan
 
                                             @can('delete blog category')
-                                            <form action="{{ route('admin.blog.destroy', $category->id) }}"
+                                            <form action="{{ route('editor.blog.destroy', $category->id) }}"
                                                 method="POST" class="inline"
                                                 onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                 @csrf
@@ -162,4 +164,4 @@
 
     </div>
     </body>
-</x-admin-app-layout>
+</x-editor-app-layout>

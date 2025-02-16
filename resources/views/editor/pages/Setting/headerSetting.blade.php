@@ -29,6 +29,7 @@
                 </h2>
                 <!-- Flexbox Layout for Form and Table -->
                 <div class="flex gap-6 pt-6">
+                    @can('store header')
                     <!-- Form Section with 40% width -->
                     <div class="w-full lg:w-2/5 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
                         <form action="{{  route('admin.setting.store') }}" method="POST" enctype="multipart/form-data">
@@ -98,6 +99,7 @@
                             </div>
                         </form>
                     </div>
+                    @endcan
                     <!-- Table Section with 60% width -->
                     <div class="w-full lg:w-3/5 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
                         <h2 class="text-gray-800 text-center dark:text-gray-100 text-2xl font-semibold mb-4">Heading Preview
