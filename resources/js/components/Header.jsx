@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Header() {
-    const [header, setHeader] = useState(null);  // Initialize header state as null
+    const [header, setHeader] = useState(null);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/setting/headerDisplay')
             .then((response) => {
                 console.log('Response Data:', response.data);
-                const data = response.data;  // Assuming response.data is an object, not an array
+                const data = response.data;
                 if (data) {
-                    setHeader(data);  // Set the header data into the state
+                    setHeader(data);
                 }
             })
             .catch((error) => {
@@ -19,22 +19,20 @@ function Header() {
     }, []);
 
     if (!header) {
-        return null; // If no header data is available, render nothing
+        return null;
     }
 
     return (
-        <>
-            <div className="component bg-black">
-                <div className="container flex items-center p-2 "> {/* Added padding here */}
-                    <div className="1 px-8">
-                        <p className="email text-[#fffff5]">Email: {header.email}</p>
-                    </div>
-                    <div className="2">
-                        <p className="contact text-[#fffff5]">Contact: {header.contact}</p>
-                    </div>
+        <div className="bg-gradient-to-r from-[#2b2b2b] to-[#454839] text-white">
+            <div className="container flex justify-between items-center p-4 mx-auto">
+                <div className="px-8 text-sm font-light">
+                    <p>Email: <span className="text-[#a8b8a4]">{header.email}</span></p>
+                </div>
+                <div className="px-8 text-sm font-light">
+                    <p>Contact: <span className="text-[#a8b8a4]">{header.contact}</span></p>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

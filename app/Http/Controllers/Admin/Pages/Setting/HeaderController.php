@@ -6,22 +6,11 @@ use App\Models\cr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\admin\pages\setting\Setting;
-use Illuminate\Routing\Controllers\Middleware;
-use App\Models\admin\pages\media\GalleryCategory;
-use Illuminate\Routing\Controllers\HasMiddleware;
+use App\Models\admin\pages\setting\Setting; 
 
-class HeaderController extends Controller implements HasMiddleware
+class HeaderController extends Controller
 {
-    public static function middleware(): array
-    {
-        return[
-        new Middleware('permission:view settingheader',only:['index']),
-        new Middleware('permission:edit settingheader',only:['edit']),
-        new Middleware('permission:store settingheader',only:['store']),
-        new Middleware('permission:destroy settingheader',only:['destroy']),
-        ];
-    }
+  
     public function store(Request $request)
     {
         try {
@@ -48,13 +37,13 @@ class HeaderController extends Controller implements HasMiddleware
     
             Log::info('Data Saved Successfully:', $data->toArray());
     
-            return redirect()->route('admin.setting.header')->with('success', 'Data created successfully!');
+            return redirect()->route('admin.setting.index')->with('success', 'Data created successfully!');
         } catch (\Exception $e) {
             Log::error('Error creating data:', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            return redirect()->route('admin.setting.header')->with('error', 'An error occurred while saving data. Please try again.');
+            return redirect()->route('admin.setting.index')->with('error', 'An error occurred while saving data. Please try again.');
         }
     }
     
@@ -65,13 +54,13 @@ class HeaderController extends Controller implements HasMiddleware
     
         // Check if the record exists
         if (!$data) {
-            return redirect()->route('admin.setting.header')->with('error', 'Data not found.');
+            return redirect()->route('admin.setting.index')->with('error', 'Data not found.');
         }
     
         // Delete the record
         $data->delete();
     
-        return redirect()->route('admin.setting.header')->with('success', 'Data deleted successfully.');
+        return redirect()->route('admin.setting.index')->with('success', 'Data deleted successfully.');
     }
     
 
